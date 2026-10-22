@@ -1,0 +1,60 @@
+RECEPTION 2.0 — HANDOVER REVIEW
+22 October 2026 | Urban Muaythai
+
+Scope: Reviewed the live Reception 2.0 Google Site in Chrome using Urban Muaythai. source/reception-original.html preserves its complete embed source (123 resource rows across 21 sections). index.html is the proposed revised page. The user requested repository-only editing. No repository has been created remotely and nothing has been published or pushed.
+
+CHANGES PREPARED
+- Start Here: access, training sequence, first-shift path and where to record work.
+- Eight navigation groups; daily work is separated from reference and handover.
+- Shift handover template with current status, next action, owner, due time and record location.
+- Added Monday to Friday duties from the source weekly checklist, including the cleaning rotation.
+- Replaced the empty member-action panel with located suspension, cancellation, membership-change and member-detail procedures. Moved payment questions into their own card.
+- Added Done when criteria and a proposed Reception / Front Desk handover and trainer demonstration checklist.
+- Missing resources are labelled Guide needed and listed together for follow-up. Existing unavailable videos remain unavailable; no replacement videos have been invented.
+- Search now covers headings, instructions and card text. Search query text is rendered as text. Waiver form names without URLs are no longer dead # links.
+- Gmail opens using the Urban Muaythai account identifier rather than a fixed browser account slot.
+
+OPEN QUESTIONS FOR THE TEAM
+1. Use Reception / Front Desk as the role label, as requested. Confirm the training support, escalation route, backup cover and outgoing staff handover date.
+2. Resolve cancellation notice wording. The processing SOP mentions 7 days but contains a 30-day worked example. The older application-form document also refers to 30 days for Teens/Cadets. The draft does not choose a universal notice period; staff must check the signed agreement and ask the manager about conflicting instructions.
+3. Confirm current handling for cancellations during suspension and minimum Kickstarter commitments. The local Clubworx analysis file has additional guidance which needs reconciling with the source SOP.
+4. Confirm mirror cleaning frequency: daily source says daily; weekly source lists Wednesday.
+5. Confirm the current Week 1 / Week 2 cleaning rotation and fortnightly vacuum / bottle-bin dates. The weekly source’s note “done on the 22nd” does not establish a reusable current schedule.
+6. Confirm current prices, offers, event dates and waiver names. Existing references, including a 2025 program-date link, have been preserved for review rather than treated as current.
+7. Identify the approved place for training sign-off and shift handover. This HTML does not save completion, store member cases, or sync a shared checklist.
+8. The original Google Sites embed is preserved in source/reception-original.html. The temporary Sites draft edit was undone and exact code restoration verified; the published Site was unchanged. No standalone Reception repository or matching console code was found among the Urban Muaythai repositories inspected. Assistant links to the Google Site and Guides holds related procedures. This package is prepared as a new local repository pending the GitHub destination.
+
+REMAINING MISSING RESOURCE ROWS (19)
+1. Clubworx How-Tos: How to create a new waiver
+2. Clubworx How-Tos: How to adjust a waiver
+3. Clubworx How-Tos: How to send a bulk Email or Text
+4. Clubworx How-Tos: How to build a report
+5. Membership Types: Membership Prices
+6. Member Actions: Failed-payment video
+7. Member Actions: Pending-payment video
+8. Kids Programs: How to approve a child waiver — direct debit or upfront
+9. Grading: Grading Procedure
+10. Grading: Grading Sheet for the Day
+11. Grading: Kids Grading Syllabus
+12. PT Sessions & Vouchers: How to add a PT session & payment to Clubworx — Video
+13. Equipment Sales: How to use the EFTPOS machine
+14. Equipment Sales: KPI — Equipment Sales
+15. Stock Control / Stock Take: Stock ordering
+16. Email Sequences: Sequences Part 1 — Message Template Set-up
+17. Email Sequences: Sequence Part 2 — Sequence Set-up
+18. Email Sequences: How to upload an image for Bulk Emails
+19. Email Sequences: How to add a video to YouTube for email sequencing
+
+READ SOURCE DOCUMENTS
+Daily checklist: https://docs.google.com/document/d/1ZorHWLC28qJ3n7Vqdghr7ZOcyUfOuV-DmhMzp1ZZHsY/edit
+Weekly checklist: https://docs.google.com/document/d/1gMLVWxIvI-NTPSV9ft6JYcomZWzDNZxkPwNIREAuuJU/edit
+Suspension procedure: https://docs.google.com/document/d/1x6H2UdQywhkSA7ZM9N8pQ1qHcTn5CUGTXymA3bBgDjY/edit
+Cancellation processing: https://docs.google.com/document/d/1T_7qnI8a4NulZQPnivvfQ99NqAtYWPysfxmD2IYpYCY/edit
+Cancellation applications: https://docs.google.com/document/d/1F-u27_V9SSFCFPNrSYfNg58GJjdqU6RncR8RNQcHzms/edit
+Membership changes: https://docs.google.com/document/d/1s7aN0DD-yq3GO1bsGBT_FzCEtsnajZv7v3Zr2LM9flo/edit
+Member details: https://docs.google.com/document/d/1RplZv1I-gtlPOa77M4EZcHOUAmXNgZTipqk21Uemwns/edit
+
+Located through Drive metadata: suspension/cancellation check sheet and bulk suspension procedure. These links were added by document identity; their complete contents and new-starter permissions still need team verification.
+Other pre-existing resource links were preserved; this pass is not an exhaustive access or freshness audit of every linked file.
+
+To regenerate index.html from the preserved source and proposed changes: node build.cjs

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Urban Muaythai — Reception</title>
+<title>Urban Muaythai — Reception / Front Desk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -226,6 +226,17 @@ footer b{color:var(--muted);font-weight:600}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 }
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
+
+.hero{padding:42px 0 28px}.version{color:var(--gold);font-size:.5em;vertical-align:middle}
+.review-banner{max-width:820px;margin:20px auto 0;padding:12px 16px;border:1px solid rgba(245,185,33,.3);border-radius:10px;background:rgba(245,185,33,.07);color:#d9c994;font-size:12px;text-align:left}
+.steps{padding-left:21px;color:var(--muted);font-size:13px;margin:14px 0}.steps li{margin:0 0 9px;padding-left:3px}
+.done{font-size:12.5px;padding:11px 12px;border-left:3px solid var(--gold);background:rgba(245,185,33,.05);color:var(--muted);margin:14px 0}.done b{color:var(--gold)}
+.tile .sub{font-size:13px;color:var(--muted);margin:12px 0}.tile .body{padding:12px 16px 16px}
+.lnk.pending{align-items:flex-start}.lnk.pending::after{content:none}.missing-label{font-size:10px;color:var(--gold);border:1px dashed var(--line-hi);padding:2px 5px;border-radius:4px;flex-shrink:0}
+.day.hide{display:none}.cards,.tiles,.waivers{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}.cards{align-items:start}
+@media(max-width:520px){.wrap{padding-left:16px;padding-right:16px}.section-head{display:block}.section-head .note{display:block;text-align:left;margin-top:8px}.jump-tab{padding:8px 11px}.lnk{flex-wrap:wrap}.hero{padding-top:30px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+
 </style>
 </head>
 <body>
@@ -248,18 +259,18 @@ footer b{color:var(--muted);font-weight:600}
 <a id="top"></a>
 <section class="hero">
   <div class="wrap">
-    <p class="eyebrow">Front Desk Knowledge Base</p>
-    <h1>RECEP<em>TION</em></h1>
-    <p class="tagline"><b>An eye for detail is critical for successful member management.</b> Use this page to find the right process fast, then follow the linked SOP as the source of truth.</p>
+    <p class="eyebrow">Front Desk • Onboarding & Daily Work</p>
+    <h1>RECEP<em>TION</em> <span class="version">2.0</span></h1>
+    <p class="tagline"><b>Know what to do, find the steps, check the result.</b> New starters begin with Start Here. Each shift, use My Shift and open the linked procedure for the task.</p><p class="review-banner">Review draft · 22 October 2026 · Training sequence and handover standards need team review. Member terms, pricing and policy questions must be checked against current approved sources.</p>
 
     <div class="command">
       <svg class="mag" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input id="search" type="text" autocomplete="off" spellcheck="false"
-        placeholder="Search suspensions, waivers, cash sheet, grading…" aria-label="Search the reception knowledge base">
+        placeholder="Search a task: check-in, cancellation, stocktake…" aria-label="Search the reception knowledge base">
       <div class="kbd"><kbd>/</kbd><span>to search</span></div>
       <button id="clearBtn" aria-label="Clear search">×</button>
     </div>
-    <div class="searchmeta" id="searchmeta"></div>
+    <div class="searchmeta" id="searchmeta" role="status" aria-live="polite"></div>
 
     <nav class="jump" aria-label="Browse by group">
       <div class="jump-tabs" id="jumpTabs"></div>
@@ -270,7 +281,7 @@ footer b{color:var(--muted);font-weight:600}
 <main class="wrap" id="content"><div id="empty"><h3>No matches</h3><p>Nothing found for that search. Try a shorter word — like “waiver”, “cash” or “kids”.</p></div></main>
 
 <footer class="wrap">
-  <p><b>Urban Muaythai — Reception Console.</b> One Team, One Fight. · Links open in a new tab. The linked SOP is the source of truth; access remains controlled by Google Drive permissions.</p>
+  <p><b>Urban Muaythai — Reception Console.</b> One Team, One Fight. · External links open in a new tab. Use the current approved SOP and signed member terms. New training and handover guidance is proposed for team review. This page does not save task completion or member cases.</p>
 </footer>
 
 <script>
@@ -286,335 +297,1646 @@ footer b{color:var(--muted);font-weight:600}
 /* Sections are grouped into the order reception actually works through a
    shift: get oriented -> front desk/check-in -> Clubworx -> sign people up
    -> handle member actions -> run programs -> sales/stock -> marketing. */
-const GROUP_ORDER = ["Daily Basics","Reception SOP Library","Check-In & Front Desk","Clubworx Reference",
-  "Memberships & Waivers","Member Actions","Programs & Sign-Ups",
-  "Sales, Stock & Money","Marketing & Events"];
-
+const GROUP_ORDER = ["Start Here","My Shift","Members & Check-In","Clubworx & Waivers","Programs","Sales & Stock","Marketing & Events","Reference & Handover"];
 const SECTIONS = [
- // ---- DAILY BASICS : start here, every shift ----
- {id:"your-role", group:"Daily Basics", title:"Your Role @ Reception", note:"Front of House Specialist",
-  cards:[
-   {h:"The role", links:[
-     {t:"Job Description — Members Relations Coordinator",k:"doc",u:"https://docs.google.com/document/d/1rTsqwmy2PChyDpzZaZaKK8g-rWdBVMu-nmXWB9jfckQ/edit?usp=sharing"},
-     {t:"Responsibilities / Outcomes",k:"doc",u:"https://docs.google.com/document/d/1GIHtonr3Dhf3LYTjJT-5FAreu9cnTrSrjzWkxWRyFSA/edit?usp=sharing"},
-     {t:"Daily Check List — Reception",k:"doc",u:"https://docs.google.com/document/d/1ZorHWLC28qJ3n7Vqdghr7ZOcyUfOuV-DmhMzp1ZZHsY/edit?usp=sharing"},
-   ]},
-   {h:"Access & keys", links:[
-     {t:"Computer Logins",k:"doc",u:"https://docs.google.com/document/d/1ujKLEcWMFK5t-yfdGe9kGu6d-IdWiWIBa_Clhy98f00/edit?usp=sharing"},
-     {t:"Open Gym Procedure — Miami",k:"doc",u:"https://docs.google.com/document/d/1zINCE4SLuXpVK43-ZDUmxsjTGjqq0QiH/edit?usp=drivesdk"},
-   ]},
-  ]},
-
- {id:"weekly", group:"Daily Basics", title:"Shift Rhythm", note:"What to check, and when", custom:"weekly"},
-
- {id:"tools", group:"Daily Basics", title:"Tools & Apps for the Job", note:"Everything you log into",
-  cards:[
-   {h:"Systems & logins", links:[
-     {t:"Clubworx — website access",k:"app",u:"https://app.clubworx.com/users/sign_in"},
-     {t:"Gmail",k:"mail",u:"https://mail.google.com/mail/u/1/#inbox"},
-     {t:"MIA — SMS / Phone call",k:"doc",u:"https://docs.google.com/document/d/1SZpweppkKpj_T_nIch-Cw4o3APu195fSFjcBUoUWPLo/edit?usp=sharing"},
-   ]},
-   {h:"Spreadsheets & trackers", links:[
-     {t:"New Member Spreadsheet",k:"sheet",u:"https://docs.google.com/spreadsheets/d/1MEobPjf1SnstEwZ2QiKGZZzMFI0RvR99Cb8fAegbTt4/edit?usp=sharing"},
-     {t:"Weekly Cash Sheet",k:"sheet",u:"https://docs.google.com/spreadsheets/d/1PjnzTzc7cpULhZHUj2NAXGto1hmMLAygqEcI2w66cwM/edit?usp=sharing"},
-     {t:"Membership Tally (Weekly)",k:"sheet",u:"https://docs.google.com/spreadsheets/d/1TaS_-gCch7Ilp7RqTvig0Xc7ecA3KXyxxcAnI8KVcbE/edit?usp=sharing"},
-     {t:"Equipment Sales Spreadsheet",k:"sheet",u:"https://docs.google.com/spreadsheets/d/1gYKxNmCSK9wFK2ymspvWSdMvqC0IeS1pmRltFBiA84s/edit?usp=sharing"},
-     {t:"Membership Types & Waivers",k:"doc",u:"https://docs.google.com/document/d/1Vcvfp3rvpYqXd91LjNH7vRDJ9Eo3v_bwdY6yiOvEvDg/edit?usp=sharing"},
-     {t:"Ticket Sales — spreadsheet",k:"sheet",u:"https://docs.google.com/spreadsheets/d/1iwCBkDVuXEr46oThBPAi9jQg5O9C-oRRYltHhuCTLDA/edit?usp=sharing"},
-     {t:"Trivia Night — spreadsheet",k:"sheet",u:"https://docs.google.com/spreadsheets/d/1bbab1kUTxP8Jxx1lrraxQCwFcMGxOYxEDcHv-ezgNrQ/edit?usp=sharing"},
-     {t:"Grading Singlet Stock",k:"sheet",u:"https://docs.google.com/spreadsheets/d/1cx27yHCW9YNVxFGhxcxZYV7C64eMiBRukjtLt6JOUOw/edit?usp=sharing"},
-     {t:"Urban Warrior participants",k:"sheet",u:"https://docs.google.com/spreadsheets/d/1nPHZnG0gq_6CiLwHDNS7p6KQbt4OQEsOE2Oof3eHpvw/edit?usp=sharing"},
-   ]},
-   {h:"Cash, cleaning & forms", links:[
-     {t:"How to fill out weekly cash sheet — PDF",k:"doc",u:"https://docs.google.com/document/d/1DyyjvT9nU8On7Kff6EG3wJQrS0LT2RsoRSUdP0ejcnU/edit?usp=sharing"},
-     {t:"End of Week Cash Reconcile",k:"doc",u:"https://docs.google.com/document/d/18V7m8iyLuXXHg4dhGe3QWzaEkAtslVOAKg1f2nx5CJQ/edit?usp=drivesdk"},
-     {t:"Cleanliness of Reception & Shop Area",k:"doc",u:"https://docs.google.com/document/d/1fPebBOKx053UF3S7AbYSo127ZBPvF--f/edit?usp=drivesdk"},
-     {t:"iPad Form",k:"form",u:"https://docs.google.com/document/d/198b9qmggaFYryvRk33W5TQiwkZWuI0VRvNuQiCB_Acg/edit?usp=sharing"},
-   ]},
-  ]},
-
- // ---- RECEPTION SOP LIBRARY : source documents from the shared SOP folder ----
- {id:"reception-sops", group:"Reception SOP Library", title:"Reception SOP Library", note:"Linked source documents",
-  cards:[
-   {h:"Open, set up & close", links:[
-     {t:"Open Gym Procedure — Miami",k:"doc",u:"https://docs.google.com/document/d/1zINCE4SLuXpVK43-ZDUmxsjTGjqq0QiH/edit?usp=drivesdk"},
-     {t:"Main Computer Set-up",k:"doc",u:"https://docs.google.com/document/d/1slF5UJhw_9g75RriyUtuAHsegXnw-aOQ/edit?usp=drivesdk"},
-     {t:"TV Slideshow — Change / Edit",k:"doc",u:"https://docs.google.com/document/d/1UdFJy0FnDlGntGoMr0qnGGObouCoV5MXMg2hzokCFZ4/edit?usp=drivesdk"},
-     {t:"iPad Kiosk Page",k:"doc",u:"https://docs.google.com/document/d/1g5_HVdiJByx8X2YhHhOtK9JeUFaig2yth_a2uQaP_nE/edit?usp=drivesdk"},
-   ]},
-   {h:"Daily service & administration", links:[
-     {t:"Front Desk Daily Duties Checklist",k:"doc",u:"https://docs.google.com/document/d/1ZorHWLC28qJ3n7Vqdghr7ZOcyUfOuV-DmhMzp1ZZHsY/edit?usp=drivesdk"},
-     {t:"Customer Service",k:"doc",u:"https://docs.google.com/document/d/1nHJCLt3mzsHuxTJRSq40PbPvIiO8701ArTtQLGMVsOo/edit?usp=drivesdk"},
-     {t:"Email Procedures",k:"doc",u:"https://docs.google.com/document/d/1ku8H5Z7nei0-mj1znY4QK01v9S7_Z8Bn/edit?usp=drivesdk"},
-     {t:"Cleanliness of Reception & Shop Area",k:"doc",u:"https://docs.google.com/document/d/1fPebBOKx053UF3S7AbYSo127ZBPvF--f/edit?usp=drivesdk"},
-   ]},
-   {h:"Members, questions & safety", links:[
-     {t:"New Member Procedure",k:"doc",u:"https://docs.google.com/document/d/1T-qMFyRSfro2-5ytvmVpHtJJZOAcRDwcWWwilpUbn4k/edit?usp=drivesdk"},
-     {t:"Common General Questions",k:"doc",u:"https://docs.google.com/document/d/1x2qpEeuvH68LevUIvweaxdUQZQ6g0Seb2m_cILbQ6w4/edit?usp=drivesdk"},
-     {t:"Maintenance or Other OHS",k:"doc",u:"https://docs.google.com/document/d/1TW-TPbcbG-dkLhRu8-Ts7_SPFGR_z8Ck-mNL3m8zDvk/edit?usp=drivesdk"},
-   ]},
-   {h:"Cash, vouchers & reference", links:[
-     {t:"End of Week Cash Reconcile",k:"doc",u:"https://docs.google.com/document/d/18V7m8iyLuXXHg4dhGe3QWzaEkAtslVOAKg1f2nx5CJQ/edit?usp=drivesdk"},
-     {t:"Miami — Play On Vouchers",k:"doc",u:"https://docs.google.com/document/d/1aMxWSjICses3fgomQ7FsStARFDwVXz6mm7VkDdAWmNo/edit?usp=drivesdk"},
-     {t:"Reception SOP Folder — all documents",k:"folder",u:"https://drive.google.com/drive/folders/1Np0xJiGjNyVFmeKxuu4nXloBVMVHNf00?usp=drive_link"},
-     {t:"Clubworx SOP Folder",k:"folder",u:"https://drive.google.com/drive/folders/1GI1sWGpIKSEUIOLi2D8YpyOhTDMnK8HW"},
-   ]},
-  ]},
-
- // ---- CHECK-IN & FRONT DESK : the day-to-day floor work ----
- {id:"member-management", group:"Check-In & Front Desk", title:"Member Management", note:"Customer service · check-ins · payments",
-  cards:[
-   {h:"Customer Service", links:[
-     {t:"Customer Service Expectations — Greetings",k:"doc",u:"https://docs.google.com/document/d/1nHJCLt3mzsHuxTJRSq40PbPvIiO8701ArTtQLGMVsOo/edit?tab=t.0"},
-   ]},
-   {h:"How to scan people into class", links:[
-     {t:"Class Check-in : Roll Call — Video",k:"video",u:"https://share.zight.com/yAuqbB8B"},
-     {t:"Class Check-in : Roll Call — PDF",k:"doc",u:"https://docs.google.com/document/d/1HbjIZfSENAhh806JG4nIdGhV9BZgW9oO2Z_8bdNh28Q/edit?tab=t.0#heading=h.gjdgxs"},
-     {t:"Sorting roll call for check-in time",k:"video",u:"https://share.getcloudapp.com/12u029eO"},
-     {t:"No photo or singlet assigned to member",k:"video",u:"https://share.getcloudapp.com/9ZuDZqgj"},
-     {t:"How to check a Flag on Clubworx",k:"video",u:"https://share.zight.com/wbug7qrP"},
-   ]},
-   {h:"Why can’t a member check in?", links:[
-     {t:"Fun n Fitness membership",k:"video",u:"https://share.getcloudapp.com/kpu4jBwp"},
-     {t:"Booked and not attended class",k:"video",u:"https://share.getcloudapp.com/2NuvN1En"},
-     {t:"If member is suspended",k:"video",u:"https://share.zight.com/p9u9Go6p"},
-   ]},
-   {h:"Payments", links:[
-     {t:"Ezidebit Payments / Direct Debits — PDF",k:"doc",u:"https://docs.google.com/document/d/1gaEQ1NaYoebU0YradhZ2-pIVUD7mUx9W8SUZyDjYWbI/edit?usp=sharing"},
-   ]},
-  ]},
-
- {id:"communication", group:"Check-In & Front Desk", title:"Communication", note:"Contact notes · email · SMS",
-  cards:[
-   {h:"Contact notes & comms", links:[
-     {t:"How to check contact notes made by all staff",k:"video",u:"https://share.zight.com/xQu5L5R1"},
-     {t:"The importance of contact notes",k:"doc",u:"https://docs.google.com/document/d/1v4BiDs0xTyXmZqElWFDqothpfwrx3tBJAuN8v0P1jSk/edit?tab=t.0#heading=h.gjdgxs"},
-     {t:"Email Procedures",k:"doc",u:"https://docs.google.com/document/d/1ku8H5Z7nei0-mj1znY4QK01v9S7_Z8Bn/edit?usp=drivesdk"},
-   ]},
-  ]},
-
- // ---- CLUBWORX REFERENCE : the system behind everything above ----
- {id:"clubworx-analysis", group:"Clubworx Reference", title:"Clubworx Analysis", note:"Do this every shift",
-  cards:[
-   {h:"Why it matters", sub:"Removes mistakes, keeps members happy, and helps the team understand what’s happening in the gym.", links:[
-     {t:"Clubworx Analysis — PDF",k:"doc",u:"https://docs.google.com/document/d/1nWKL28wb-uYfow7pduA2-tVSuXluB0BfOCX9Yn4z0D8/edit?tab=t.0"},
-     {t:"Clubworx Analysis — Video",k:"video",u:"https://share.getcloudapp.com/6quQN9Ad"},
-   ]},
-  ]},
-
- {id:"clubworx-howto", group:"Clubworx Reference", title:"Clubworx How-Tos", note:"",
-  cards:[
-   {h:"Working in Clubworx", links:[
-     {t:"How to create a new waiver",k:"doc",u:""},
-     {t:"How to adjust a waiver",k:"doc",u:""},
-     {t:"Waiver Types Explained",k:"link",u:"#waivers"},
-     {t:"How to send a bulk Email or Text",k:"doc",u:""},
-     {t:"How to build a report",k:"doc",u:""},
-   ]},
-  ]},
-
- // ---- MEMBERSHIPS & WAIVERS : signing people up ----
- {id:"membership-types", group:"Memberships & Waivers", title:"Membership Types", note:"Prices · waivers · discounts",
-  cards:[
-   {h:"Pricing & memberships", links:[
-     {t:"Membership Prices",k:"doc",u:""},
-     {t:"6 & 12 month memberships — PDF",k:"doc",u:"https://docs.google.com/document/d/1Zi_UeT6fX84fzy8FmTW_pd9DOtjG6_n3GZ0QP65H5TU/edit?usp=sharing"},
-     {t:"Review Waivers — Check List",k:"doc",u:"https://docs.google.com/document/d/1Zi_UeT6fX84fzy8FmTW_pd9DOtjG6_n3GZ0QP65H5TU/edit?usp=sharing"},
-     {t:"Upfront payments — members",k:"doc",u:"https://docs.google.com/document/d/1TD5r6EaclCui4H6dhEbYuWJa5MOorjO74ux40ZS8dr0/edit?tab=t.0"},
-     {t:"Paying with business — sponsor 12 mths",k:"doc",u:"https://docs.google.com/document/d/15IaPE58JYzCZPJhqWNKqL9c5D2i_jyfOI2EhXTQh5B8/edit?tab=t.0"},
-     {t:"Family Discounts",k:"sheet",u:"https://docs.google.com/spreadsheets/d/1z6VtArvVm_OuapfKdcj2rUjKQwiRSvNI5Rd_QUoHrBk/edit?gid=0#gid=0"},
-   ]},
-  ]},
-
- {id:"waivers", group:"Memberships & Waivers", title:"Waiver Types Explained", note:"Which waiver, when", custom:"waivers"},
-
- // ---- MEMBER ACTIONS : changing an existing membership ----
- {id:"quick-actions", group:"Member Actions", title:"Member Actions", note:"Suspend · cancel · change · upgrade", tiles:[
-   {h:"SUSPENSIONS", links:[
-     {t:"Suspensions — Video",k:"video",u:""},
-     {t:"Suspensions — PDF",k:"doc",u:""},
-     {t:"How to do a Bulk Suspension",k:"video",u:""},
-     {t:"Suspension / Cancellation Check sheet",k:"doc",u:""},
-     {t:"Applying Cancellation — PDF",k:"doc",u:""},
-   ]},
-   {h:"CANCELLATIONS", links:[
-     {t:"Failed Payments",k:"video",u:""},
-     {t:"Still Pending",k:"video",u:""},
-   ]},
-   {h:"UPGRADE / DOWNGRADE", links:[
-     {t:"How to complete a Membership upgrade / downgrade",k:"doc",u:""},
-   ]},
-   {h:"MEMBER DETAILS", links:[
-     {t:"Change email, phone number, address",k:"video",u:""},
-     {t:"Scan tag",k:"video",u:""},
-   ]},
- ]},
-
- // ---- PROGRAMS & SIGN-UPS : trials, kids, grading, PT, special programs ----
- {id:"kickstarter", group:"Programs & Sign-Ups", title:"Kickstarter Program", note:"Trial → rollover",
-  cards:[
-   {h:"Kickstarter", links:[
-     {t:"Kickstarter Protocol — Handbook",k:"doc",u:"https://docs.google.com/document/d/1shEPW-WJSaY3ShHhGd9faXxpiU5fNlrVvMoK8a0FyIg/edit?tab=t.0"},
-     {t:"How to send / fill out a Kickstarter Waiver",k:"video",u:"https://share.getcloudapp.com/NQuxQ6ne"},
-     {t:"Approve a Kickstarter Waiver — direct debit",k:"video",u:"https://share.getcloudapp.com/YEuRq55q"},
-     {t:"Approve a Kickstarter Waiver — no deposit",k:"video",u:"https://share.getcloudapp.com/QwuEvOXE"},
-     {t:"Approve a Kickstarter Waiver — Upfront",k:"video",u:"https://share.getcloudapp.com/geud9L0w"},
-     {t:"For new member — Check list",k:"doc",u:"https://docs.google.com/document/d/1W-P7sZFd0jzQ9TCjndr-pNNtsc9H5Dcxn27aKp-R--M/edit?usp=sharing"},
-   ]},
-  ]},
-
- {id:"urban-warrior", group:"Programs & Sign-Ups", title:"Urban Warrior Program", note:"Not currently running",
-  cards:[
-   {h:"Urban Warrior", links:[
-     {t:"Urban Warrior — pre-start check list",k:"doc",u:"https://docs.google.com/document/d/1wwYeOhuFXlzQeUzqa_6W_oejPgqJHhbq3LS7BZyjIxE/edit?usp=sharing"},
-     {t:"Dates and prices — 2025",k:"doc",u:"https://docs.google.com/document/d/13_IVQOG-BdaagmblVf0rHOUGCIc6wfBx4rvBt4hibSo/edit?tab=t.0"},
-     {t:"Current Member — Flow Chart",k:"doc",u:"https://docs.google.com/document/d/1QxAIlsi-hjCEULXHdr1TqbyBhVBbNj3p/edit"},
-     {t:"New Member — Flow Chart",k:"doc",u:"https://docs.google.com/document/d/1yhNwuUNF-sFStpRsxe6zRd1cztPXoklh/edit"},
-     {t:"How to adjust Urban Warrior Waiver & memberships for next event",k:"video",u:"https://share.getcloudapp.com/YEuWl4Ww"},
-     {t:"Urban Warrior Handbook — for staff",k:"doc",u:"https://docs.google.com/document/d/1wmxkj81TTYr1erFDimU7z3i2wWpZm7hmKhsM1uGTqZc/edit?tab=t.0#heading=h.jdnxrovwdg7"},
-     {t:"Urban Warrior Member Handbook",k:"doc",u:"https://docs.google.com/document/d/1zLFkGo4P_VVFOQ-B_u7_qSBBmQyMX2H-9SfLBRh_17g/edit?tab=t.0"},
-   ]},
-  ]},
-
- {id:"kids", group:"Programs & Sign-Ups", title:"Kids Programs", note:"Waivers · trials · memberships",
-  cards:[
-   {h:"Getting kids started", links:[
-     {t:"Kids and Teens — Flow Chart",k:"doc",u:"https://docs.google.com/drawings/d/1i-9uNQM6QZM689W0kSTAJszIMtjJMDVmk_IHrXvw7w0/edit?usp=sharing"},
-     {t:"Add a non-attending parent and child manually",k:"video",u:"https://share.getcloudapp.com/04uL49n0"},
-     {t:"Send a waiver for a child — Two week Trial (New Student)",k:"video",u:"https://share.getcloudapp.com/YEuXDjrG"},
-     {t:"How to approve a New Student Waiver for a child",k:"video",u:"https://share.getcloudapp.com/L1uWAdmd"},
-     {t:"Adding a child — 2 week Trial Membership",k:"video",u:"https://share.getcloudapp.com/L1uWABYz"},
-     {t:"How to approve a child waiver — direct debit or upfront",k:"video",u:""},
-     {t:"Kids Waiver Error — Video",k:"video",u:"https://share.getcloudapp.com/eDu85mnx"},
-     {t:"Kids waiver — Check sheet",k:"doc",u:"https://docs.google.com/document/d/13swZu2uT4U2EeRg4q7ebBIpfETljeBY1FltZJ6xpJfM/edit?usp=sharing"},
-   ]},
-   {h:"Adult & child both training", links:[
-     {t:"Same membership",k:"video",u:"https://share.getcloudapp.com/kpuKPPwQ"},
-     {t:"Different memberships",k:"video",u:"https://share.getcloudapp.com/X6uexxwb"},
-     {t:"Kids (6–9 yrs) — Upfront",k:"doc",u:"https://share.getcloudapp.com/llu5xr8E"},
-     {t:"Kids / Cadets / Teens — Direct Debit",k:"video",u:"https://share.getcloudapp.com/RBuYe8NY"},
-   ]},
-  ]},
-
- {id:"grading", group:"Programs & Sign-Ups", title:"Grading", note:"",
-  cards:[
-   {h:"Grading day", links:[
-     {t:"Grading Procedure",k:"doc",u:""},
-     {t:"Grading Sheet for the Day",k:"sheet",u:""},
-     {t:"Kids Grading Syllabus",k:"doc",u:""},
-   ]},
-  ]},
-
- {id:"pt-and-vouchers", group:"Programs & Sign-Ups", title:"PT Sessions & Vouchers", note:"",
-  cards:[
-   {h:"Personal Training", links:[
-     {t:"How to add a PT session & payment to Clubworx — Video",k:"video",u:""},
-   ]},
-   {h:"Government Vouchers", links:[
-     {t:"QLD — Play On Vouchers, how to redeem",k:"doc",u:"https://docs.google.com/document/d/1aMxWSjICses3fgomQ7FsStARFDwVXz6mm7VkDdAWmNo/edit?usp=drivesdk"},
-   ]},
-  ]},
-
- // ---- SALES, STOCK & MONEY ----
- {id:"equipment-sales", group:"Sales, Stock & Money", title:"Equipment Sales", note:"POS · EFTPOS · reconciliation",
-  cards:[
-   {h:"Selling & reconciling", links:[
-     {t:"Price List",k:"doc",u:"https://docs.google.com/document/d/1WJhmq_CGhtUSbO0vmU1z5ixl9d9waaofGjLTRDQh8sk/edit?tab=t.0"},
-     {t:"Entering a sale — via Clubworx POS",k:"link",u:"https://drive.google.com/file/d/1EaVs8D-YCJa9KVOXoIoo2QEHELITGJPR/view"},
-     {t:"How to use the EFTPOS machine",k:"doc",u:""},
-     {t:"Till Reconciliation — Cash Weekly sales sheet PDF",k:"doc",u:"https://docs.google.com/document/d/12YxSvA3md1gSGsR699UY1wdjrHU7v7W6AqTrloiKbKU/edit?usp=sharing"},
-     {t:"Overview of Equipment — explained",k:"link",u:"https://drive.google.com/file/d/1J4jQUNGM4Ie8nzoOczWT9fgEfBFeHrVb/view?usp=sharing"},
-     {t:"KPI — Equipment Sales",k:"doc",u:""},
-     {t:"Event Sales — Procedure",k:"sheet",u:"https://docs.google.com/spreadsheets/d/1iwCBkDVuXEr46oThBPAi9jQg5O9C-oRRYltHhuCTLDA/edit?usp=sharing"},
-   ]},
-  ]},
-
- {id:"stock", group:"Sales, Stock & Money", title:"Stock Control / Stock Take", note:"",
-  cards:[
-   {h:"Stock", links:[
-     {t:"New Stock Arrivals",k:"doc",u:"https://docs.google.com/document/d/1F3gKPERTkcpygNpiOpYlyO9qtc5Z_G4oaxGnNy3rF9E/edit?tab=t.0"},
-     {t:"Stocktake Sheet",k:"sheet",u:"https://docs.google.com/spreadsheets/d/1o_Kf-GloFmSzVbv60qm_Cr1LOT4j3JHFa66olbNRjt0/edit?usp=sharing"},
-     {t:"Stocktake Procedure — PDF",k:"doc",u:"https://docs.google.com/document/d/1dU8q1fHZPBwBtMvkdZ_7lgx4ns22RqZknEjzIVHo1XE/edit?usp=sharing"},
-     {t:"Grading Singlets Stocktake",k:"sheet",u:"https://docs.google.com/spreadsheets/d/1l7IjITYLZPxr-3mcxmI5PdlVPVI0g4COcAnIsRiidtk/edit?usp=sharing"},
-     {t:"Stock ordering",k:"doc",u:""},
-   ]},
-  ]},
-
- // ---- MARKETING & EVENTS ----
- {id:"sequences", group:"Marketing & Events", title:"Email Sequences", note:"Automated member journeys",
-  cards:[
-   {h:"Sequence set-up", links:[
-     {t:"Sequences Part 1 — Message Template Set-up",k:"video",u:""},
-     {t:"Sequence Part 2 — Sequence Set-up",k:"video",u:""},
-     {t:"How to upload an image for Bulk Emails",k:"video",u:""},
-     {t:"How to add a video to YouTube for email sequencing",k:"video",u:""},
-   ]},
-  ]},
-
- {id:"social-media", group:"Marketing & Events", title:"Social Media", note:"",
-  cards:[
-   {h:"Socials", links:[
-     {t:"Social Media Responsibilities — PDF",k:"doc",u:"https://docs.google.com/document/d/1CpuH3u53S6g24nLHSpgYAtm03vmvGRYBeR8IXDe2PuY/edit?usp=sharing"},
-     {t:"Facebook Group for admin purposes — Video",k:"video",u:"https://share.getcloudapp.com/rRuOB5zx"},
-   ]},
-  ]},
-
- {id:"social-events", group:"Marketing & Events", title:"Social Events", note:"",
-  cards:[
-   {h:"Events", links:[
-     {t:"Social Event Procedure",k:"doc",u:"https://docs.google.com/document/d/1iqPutoFJqsuBS0MikuW-i1aL6jSKzQwtnWsrNMK-C94/edit?usp=sharing"},
-     {t:"Social Events Form — PDF",k:"doc",u:"https://docs.google.com/document/d/1azQ9X2Q3Q9L2AmN0woyN-Yk_Lxk2t65tT_3fW7GKIKw/edit?usp=sharing"},
-     {t:"Yearly Social Events Calendar",k:"sheet",u:"https://docs.google.com/spreadsheets/d/1Uhe2wu6iz2BLXZ2ITXq__jr4h8CtQTKe/edit?usp=sharing&ouid=100684694802703214667&rtpof=true&sd=true"},
-   ]},
-  ]},
+  {
+    "id": "start-here",
+    "group": "Start Here",
+    "title": "New to reception? Start here.",
+    "note": "A clear path through your first shifts",
+    "cards": [
+      {
+        "h": "1. Get ready with your trainer",
+        "sub": "Before handling reception on your own",
+        "steps": [
+          "Confirm the gym location, shift times, assigned trainer and who covers reception during breaks.",
+          "Open Clubworx, Urban Muaythai Gmail and the required trackers with your trainer. Confirm access from your own authorised account.",
+          "Walk through opening, check-in, till reconciliation and closing together."
+        ],
+        "done": "You can open the required tools and identify the Reception / Front Desk support for your shift.",
+        "links": [
+          {
+            "t": "Role & responsibilities",
+            "u": "#your-role",
+            "k": "link"
+          },
+          {
+            "t": "Systems & trackers",
+            "u": "#tools",
+            "k": "link"
+          }
+        ]
+      },
+      {
+        "h": "2. Follow the shift in order",
+        "sub": "Start → class check-in → end of shift",
+        "steps": [
+          "Read Clubworx notes, dated tasks and the previous shift’s outstanding work.",
+          "Follow Every Shift and the weekly duties for the day. Use the source procedure for each unfamiliar task.",
+          "Finish the audit, record what is complete and hand over anything outstanding with an owner and next action."
+        ],
+        "done": "The next staff member can see what happened and what needs attention.",
+        "links": [
+          {
+            "t": "Every Shift",
+            "u": "#weekly",
+            "k": "link"
+          },
+          {
+            "t": "Weekly duties",
+            "u": "#weekly-duties",
+            "k": "link"
+          },
+          {
+            "t": "Shift handover template",
+            "u": "#shift-handover",
+            "k": "link"
+          }
+        ]
+      },
+      {
+        "h": "3. Learn, practise, then demonstrate",
+        "sub": "Proposed training sequence",
+        "steps": [
+          "Observe your trainer completing a task and explaining the checks.",
+          "Practise the same task under supervision using the linked procedure.",
+          "Demonstrate the task, verify the result and have your trainer record sign-off in the team’s training record."
+        ],
+        "done": "Your trainer has checked the result, including the notes and any member confirmation.",
+        "links": [
+          {
+            "t": "Reception / Front Desk handover",
+            "u": "#training",
+            "k": "link"
+          },
+          {
+            "t": "Common member requests",
+            "u": "#quick-actions",
+            "k": "link"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "help",
+    "group": "Start Here",
+    "title": "When you need help",
+    "note": "Proposed handover standard • confirm the escalation contact",
+    "cards": [
+      {
+        "h": "Check before changing an account",
+        "steps": [
+          "Confirm the correct member and read their notes, signed waiver, membership and payment schedule.",
+          "If the request, dates, price or payment outcome is unclear, ask the assigned trainer or manager to review it before making the change.",
+          "When a guide is missing, record the question and who will resolve it."
+        ],
+        "done": "The decision and next action are clear in the member’s Clubworx record.",
+        "links": [
+          {
+            "t": "Member requests",
+            "u": "#quick-actions",
+            "k": "link"
+          },
+          {
+            "t": "Source procedures",
+            "u": "#reception-sops",
+            "k": "link"
+          }
+        ]
+      },
+      {
+        "h": "Use the correct record",
+        "steps": [
+          "Record membership conversations and follow-ups in Clubworx.",
+          "Record new members and cash activity in their existing trackers.",
+          "Use this page to find instructions. Keep member cases and actual training sign-offs in the team’s approved records."
+        ],
+        "done": "The next staff member can find the conversation and follow-up in the expected system.",
+        "links": [
+          {
+            "t": "Contact notes & communication",
+            "u": "#communication",
+            "k": "link"
+          },
+          {
+            "t": "Systems & trackers",
+            "u": "#tools",
+            "k": "link"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "your-role",
+    "group": "My Shift",
+    "title": "Your Role @ Reception",
+    "note": "Front of House Specialist",
+    "cards": [
+      {
+        "h": "The role",
+        "links": [
+          {
+            "t": "Job Description — Members Relations Coordinator",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1rTsqwmy2PChyDpzZaZaKK8g-rWdBVMu-nmXWB9jfckQ/edit?usp=sharing"
+          },
+          {
+            "t": "Responsibilities / Outcomes",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1GIHtonr3Dhf3LYTjJT-5FAreu9cnTrSrjzWkxWRyFSA/edit?usp=sharing"
+          },
+          {
+            "t": "Daily Check List — Reception",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1ZorHWLC28qJ3n7Vqdghr7ZOcyUfOuV-DmhMzp1ZZHsY/edit?usp=sharing"
+          },
+          {
+            "t": "Reception weekly checklist",
+            "u": "https://docs.google.com/document/d/1gMLVWxIvI-NTPSV9ft6JYcomZWzDNZxkPwNIREAuuJU/edit",
+            "k": "doc"
+          }
+        ]
+      },
+      {
+        "h": "Access & keys",
+        "links": [
+          {
+            "t": "Computer Logins",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1ujKLEcWMFK5t-yfdGe9kGu6d-IdWiWIBa_Clhy98f00/edit?usp=sharing"
+          },
+          {
+            "t": "Open Gym Procedure — Miami",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1zINCE4SLuXpVK43-ZDUmxsjTGjqq0QiH/edit?usp=drivesdk"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "weekly",
+    "group": "My Shift",
+    "title": "Every Shift",
+    "note": "Daily duties • open the source checklist for full detail",
+    "custom": "weekly"
+  },
+  {
+    "id": "tools",
+    "group": "My Shift",
+    "title": "Tools & Apps for the Job",
+    "note": "Everything you log into",
+    "cards": [
+      {
+        "h": "Systems & logins",
+        "links": [
+          {
+            "t": "Clubworx — website access",
+            "k": "app",
+            "u": "https://app.clubworx.com/users/sign_in"
+          },
+          {
+            "t": "Gmail",
+            "k": "mail",
+            "u": "https://mail.google.com/mail/?authuser=getfit%40urbanmuaythai.com"
+          },
+          {
+            "t": "MIA — SMS / Phone call",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1SZpweppkKpj_T_nIch-Cw4o3APu195fSFjcBUoUWPLo/edit?usp=sharing"
+          }
+        ],
+        "sub": "Use the Urban Muaythai account. Ask your trainer to verify access before your first shift."
+      },
+      {
+        "h": "Spreadsheets & trackers",
+        "links": [
+          {
+            "t": "New Member Spreadsheet",
+            "k": "sheet",
+            "u": "https://docs.google.com/spreadsheets/d/1MEobPjf1SnstEwZ2QiKGZZzMFI0RvR99Cb8fAegbTt4/edit?usp=sharing"
+          },
+          {
+            "t": "Weekly Cash Sheet",
+            "k": "sheet",
+            "u": "https://docs.google.com/spreadsheets/d/1PjnzTzc7cpULhZHUj2NAXGto1hmMLAygqEcI2w66cwM/edit?usp=sharing"
+          },
+          {
+            "t": "Membership Tally (Weekly)",
+            "k": "sheet",
+            "u": "https://docs.google.com/spreadsheets/d/1TaS_-gCch7Ilp7RqTvig0Xc7ecA3KXyxxcAnI8KVcbE/edit?usp=sharing"
+          },
+          {
+            "t": "Equipment Sales Spreadsheet",
+            "k": "sheet",
+            "u": "https://docs.google.com/spreadsheets/d/1gYKxNmCSK9wFK2ymspvWSdMvqC0IeS1pmRltFBiA84s/edit?usp=sharing"
+          },
+          {
+            "t": "Membership Types & Waivers",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1Vcvfp3rvpYqXd91LjNH7vRDJ9Eo3v_bwdY6yiOvEvDg/edit?usp=sharing"
+          },
+          {
+            "t": "Ticket Sales — spreadsheet",
+            "k": "sheet",
+            "u": "https://docs.google.com/spreadsheets/d/1iwCBkDVuXEr46oThBPAi9jQg5O9C-oRRYltHhuCTLDA/edit?usp=sharing"
+          },
+          {
+            "t": "Trivia Night — spreadsheet",
+            "k": "sheet",
+            "u": "https://docs.google.com/spreadsheets/d/1bbab1kUTxP8Jxx1lrraxQCwFcMGxOYxEDcHv-ezgNrQ/edit?usp=sharing"
+          },
+          {
+            "t": "Grading Singlet Stock",
+            "k": "sheet",
+            "u": "https://docs.google.com/spreadsheets/d/1cx27yHCW9YNVxFGhxcxZYV7C64eMiBRukjtLt6JOUOw/edit?usp=sharing"
+          },
+          {
+            "t": "Urban Warrior participants",
+            "k": "sheet",
+            "u": "https://docs.google.com/spreadsheets/d/1nPHZnG0gq_6CiLwHDNS7p6KQbt4OQEsOE2Oof3eHpvw/edit?usp=sharing"
+          }
+        ]
+      },
+      {
+        "h": "Cash, cleaning & forms",
+        "links": [
+          {
+            "t": "How to fill out weekly cash sheet — PDF",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1DyyjvT9nU8On7Kff6EG3wJQrS0LT2RsoRSUdP0ejcnU/edit?usp=sharing"
+          },
+          {
+            "t": "End of Week Cash Reconcile",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/18V7m8iyLuXXHg4dhGe3QWzaEkAtslVOAKg1f2nx5CJQ/edit?usp=drivesdk"
+          },
+          {
+            "t": "Cleanliness of Reception & Shop Area",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1fPebBOKx053UF3S7AbYSo127ZBPvF--f/edit?usp=drivesdk"
+          },
+          {
+            "t": "iPad Form",
+            "k": "form",
+            "u": "https://docs.google.com/document/d/198b9qmggaFYryvRk33W5TQiwkZWuI0VRvNuQiCB_Acg/edit?usp=sharing"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "weekly-duties",
+    "group": "My Shift",
+    "title": "Weekly Duties",
+    "note": "From the weekly checklist • confirm current rotations with your trainer",
+    "cards": [
+      {
+        "h": "Monday",
+        "steps": [
+          "Put bins out on the road.",
+          "Attend the team meeting.",
+          "Call Kickstarter members who have not attended.",
+          "Cobweb rotation: Kickstarter area (Week 1) / ring (Week 2)."
+        ],
+        "done": "Tasks completed, or the outstanding task and next action handed over.",
+        "links": [
+          {
+            "t": "Weekly source checklist",
+            "u": "https://docs.google.com/document/d/1gMLVWxIvI-NTPSV9ft6JYcomZWzDNZxkPwNIREAuuJU/edit",
+            "k": "doc"
+          },
+          {
+            "t": "Daily source checklist",
+            "u": "https://docs.google.com/document/d/1ZorHWLC28qJ3n7Vqdghr7ZOcyUfOuV-DmhMzp1ZZHsY/edit",
+            "k": "doc"
+          }
+        ]
+      },
+      {
+        "h": "Tuesday",
+        "steps": [
+          "Review yellow flags: no sessions for two weeks.",
+          "Mop the strength and conditioning area.",
+          "Cobweb rotation: Carnage wall (Week 1) / bags and pads back wall (Week 2)."
+        ],
+        "done": "Tasks completed, or the outstanding task and next action handed over.",
+        "links": [
+          {
+            "t": "Weekly source checklist",
+            "u": "https://docs.google.com/document/d/1gMLVWxIvI-NTPSV9ft6JYcomZWzDNZxkPwNIREAuuJU/edit",
+            "k": "doc"
+          },
+          {
+            "t": "Daily source checklist",
+            "u": "https://docs.google.com/document/d/1ZorHWLC28qJ3n7Vqdghr7ZOcyUfOuV-DmhMzp1ZZHsY/edit",
+            "k": "doc"
+          }
+        ]
+      },
+      {
+        "h": "Wednesday",
+        "steps": [
+          "Review orange flags: no sessions since Monday.",
+          "Retry unanswered Kickstarter calls.",
+          "Clean all mirrors.",
+          "Empty vacuums every second week; confirm the current rotation date.",
+          "Cobweb rotation: mats near reception (Week 1) / mats near weights (Week 2)."
+        ],
+        "done": "Tasks completed, or the outstanding task and next action handed over.",
+        "links": [
+          {
+            "t": "Weekly source checklist",
+            "u": "https://docs.google.com/document/d/1gMLVWxIvI-NTPSV9ft6JYcomZWzDNZxkPwNIREAuuJU/edit",
+            "k": "doc"
+          },
+          {
+            "t": "Daily source checklist",
+            "u": "https://docs.google.com/document/d/1ZorHWLC28qJ3n7Vqdghr7ZOcyUfOuV-DmhMzp1ZZHsY/edit",
+            "k": "doc"
+          }
+        ]
+      },
+      {
+        "h": "Thursday",
+        "steps": [
+          "Complete stocktake and stock order.",
+          "Complete the cash sheet; follow the daily checklist for end-of-week reconciliation and email to the Operations Manager.",
+          "Call members who have not rolled over.",
+          "Cobweb rotation: reception (Week 1) / roller-door wall (Week 2)."
+        ],
+        "done": "Tasks completed, or the outstanding task and next action handed over.",
+        "links": [
+          {
+            "t": "Weekly source checklist",
+            "u": "https://docs.google.com/document/d/1gMLVWxIvI-NTPSV9ft6JYcomZWzDNZxkPwNIREAuuJU/edit",
+            "k": "doc"
+          },
+          {
+            "t": "Daily source checklist",
+            "u": "https://docs.google.com/document/d/1ZorHWLC28qJ3n7Vqdghr7ZOcyUfOuV-DmhMzp1ZZHsY/edit",
+            "k": "doc"
+          }
+        ]
+      },
+      {
+        "h": "Friday",
+        "steps": [
+          "Complete lost-property duties using the daily checklist.",
+          "Review rollover flags and enter Kickstarter goals.",
+          "Empty the bottle bin every two weeks; confirm the current rotation date.",
+          "Cobweb rotation: middle mats (Week 1) / weights area (Week 2)."
+        ],
+        "done": "Tasks completed, or the outstanding task and next action handed over.",
+        "links": [
+          {
+            "t": "Weekly source checklist",
+            "u": "https://docs.google.com/document/d/1gMLVWxIvI-NTPSV9ft6JYcomZWzDNZxkPwNIREAuuJU/edit",
+            "k": "doc"
+          },
+          {
+            "t": "Daily source checklist",
+            "u": "https://docs.google.com/document/d/1ZorHWLC28qJ3n7Vqdghr7ZOcyUfOuV-DmhMzp1ZZHsY/edit",
+            "k": "doc"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "shift-handover",
+    "group": "My Shift",
+    "title": "Hand Over the Shift",
+    "note": "Proposed template • record in the team’s agreed handover location",
+    "cards": [
+      {
+        "h": "Outstanding work",
+        "steps": [
+          "Request / task: what is outstanding?",
+          "Current status: what has already been checked or completed?",
+          "Next action: what exactly needs to happen?",
+          "Owner and due time: who will do it, and when?",
+          "Record: where are the Clubworx notes or relevant tracker entry?"
+        ],
+        "done": "The incoming staff member understands and accepts the next action.",
+        "links": [
+          {
+            "t": "Contact notes guidance",
+            "u": "#communication",
+            "k": "link"
+          }
+        ]
+      },
+      {
+        "h": "Before you leave",
+        "steps": [
+          "Complete Clubworx Analysis and the till reconciliation.",
+          "Confirm new-member records, membership dates and first debit dates are correct.",
+          "Check that confirmations and membership conversations are recorded.",
+          "Leave unresolved requests with a named owner and next action. Follow the closing checklist."
+        ],
+        "done": "Closing checks are complete and outstanding work is visible to the next shift.",
+        "links": [
+          {
+            "t": "Daily source checklist",
+            "u": "https://docs.google.com/document/d/1ZorHWLC28qJ3n7Vqdghr7ZOcyUfOuV-DmhMzp1ZZHsY/edit",
+            "k": "doc"
+          },
+          {
+            "t": "Clubworx Analysis",
+            "u": "#clubworx-analysis",
+            "k": "link"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "member-management",
+    "group": "Members & Check-In",
+    "title": "Member Management",
+    "note": "Customer service · check-ins · payments",
+    "cards": [
+      {
+        "h": "Customer Service",
+        "links": [
+          {
+            "t": "Customer Service Expectations — Greetings",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1nHJCLt3mzsHuxTJRSq40PbPvIiO8701ArTtQLGMVsOo/edit?tab=t.0"
+          }
+        ]
+      },
+      {
+        "h": "How to scan people into class",
+        "links": [
+          {
+            "t": "Class Check-in : Roll Call — Video",
+            "k": "video",
+            "u": "https://share.zight.com/yAuqbB8B"
+          },
+          {
+            "t": "Class Check-in : Roll Call — PDF",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1HbjIZfSENAhh806JG4nIdGhV9BZgW9oO2Z_8bdNh28Q/edit?tab=t.0#heading=h.gjdgxs"
+          },
+          {
+            "t": "Sorting roll call for check-in time",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/12u029eO"
+          },
+          {
+            "t": "No photo or singlet assigned to member",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/9ZuDZqgj"
+          },
+          {
+            "t": "How to check a Flag on Clubworx",
+            "k": "video",
+            "u": "https://share.zight.com/wbug7qrP"
+          }
+        ]
+      },
+      {
+        "h": "Why can’t a member check in?",
+        "links": [
+          {
+            "t": "Fun n Fitness membership",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/kpu4jBwp"
+          },
+          {
+            "t": "Booked and not attended class",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/2NuvN1En"
+          },
+          {
+            "t": "If member is suspended",
+            "k": "video",
+            "u": "https://share.zight.com/p9u9Go6p"
+          }
+        ]
+      },
+      {
+        "h": "Payments",
+        "links": [
+          {
+            "t": "Ezidebit Payments / Direct Debits — PDF",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1gaEQ1NaYoebU0YradhZ2-pIVUD7mUx9W8SUZyDjYWbI/edit?usp=sharing"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "communication",
+    "group": "Members & Check-In",
+    "title": "Communication",
+    "note": "Contact notes · email · SMS",
+    "cards": [
+      {
+        "h": "Contact notes & comms",
+        "links": [
+          {
+            "t": "How to check contact notes made by all staff",
+            "k": "video",
+            "u": "https://share.zight.com/xQu5L5R1"
+          },
+          {
+            "t": "The importance of contact notes",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1v4BiDs0xTyXmZqElWFDqothpfwrx3tBJAuN8v0P1jSk/edit?tab=t.0#heading=h.gjdgxs"
+          },
+          {
+            "t": "Email Procedures",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1ku8H5Z7nei0-mj1znY4QK01v9S7_Z8Bn/edit?usp=drivesdk"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "quick-actions",
+    "group": "Members & Check-In",
+    "title": "Member Actions",
+    "note": "Open the procedure • verify the result • record the outcome",
+    "tiles": [
+      {
+        "h": "SUSPENSIONS",
+        "sub": "Check the request, signed waiver, dates and payments before applying the hold.",
+        "done": "Dates and affected payments checked; confirmation and contact notes recorded.",
+        "links": [
+          {
+            "t": "Process a member suspension",
+            "u": "https://docs.google.com/document/d/1x6H2UdQywhkSA7ZM9N8pQ1qHcTn5CUGTXymA3bBgDjY/edit",
+            "k": "doc"
+          },
+          {
+            "t": "Suspension / cancellation check sheet",
+            "u": "https://docs.google.com/document/d/125qa3jhbxQSFZQpbR_kM0w0uMIPRfm8kEAPOce7tvwA/edit",
+            "k": "doc"
+          },
+          {
+            "t": "Bulk member suspensions — supervised task",
+            "u": "https://docs.google.com/document/d/1X-KEmpsDMUe5Iz2BZTXGom7wlXWdneujFK1_nBspqTc/edit",
+            "k": "doc"
+          }
+        ]
+      },
+      {
+        "h": "CANCELLATIONS",
+        "sub": "Read the signed agreement and previous notes before confirming the final payment or end date. The source procedure contains conflicting notice-period examples; ask the manager to resolve any uncertainty.",
+        "done": "Final payment and membership end date verified; confirmation and contact notes recorded.",
+        "links": [
+          {
+            "t": "Cancellation application forms & checks",
+            "u": "https://docs.google.com/document/d/1F-u27_V9SSFCFPNrSYfNg58GJjdqU6RncR8RNQcHzms/edit",
+            "k": "doc"
+          },
+          {
+            "t": "Processing member cancellations — review notice wording",
+            "u": "https://docs.google.com/document/d/1T_7qnI8a4NulZQPnivvfQ99NqAtYWPysfxmD2IYpYCY/edit",
+            "k": "doc"
+          },
+          {
+            "t": "Suspension / cancellation check sheet",
+            "u": "https://docs.google.com/document/d/125qa3jhbxQSFZQpbR_kM0w0uMIPRfm8kEAPOce7tvwA/edit",
+            "k": "doc"
+          }
+        ]
+      },
+      {
+        "h": "UPGRADE / DOWNGRADE",
+        "sub": "Follow the documented order. Check the upcoming payment date and signed membership-change waiver.",
+        "done": "Old and new membership dates checked; only the intended payment schedule remains.",
+        "links": [
+          {
+            "t": "Membership changes / upgrade / downgrade",
+            "u": "https://docs.google.com/document/d/1s7aN0DD-yq3GO1bsGBT_FzCEtsnajZv7v3Zr2LM9flo/edit",
+            "k": "doc"
+          }
+        ]
+      },
+      {
+        "h": "MEMBER DETAILS",
+        "sub": "Open the correct profile, update the requested details and save. Follow the full SOP for family relationships or payment methods.",
+        "done": "Saved contact details or scan tag checked against the member’s request.",
+        "links": [
+          {
+            "t": "Update member details & scan tags",
+            "u": "https://docs.google.com/document/d/1RplZv1I-gtlPOa77M4EZcHOUAmXNgZTipqk21Uemwns/edit",
+            "k": "doc"
+          }
+        ]
+      },
+      {
+        "h": "PAYMENT QUESTIONS",
+        "sub": "Check the member’s payment status and notes. Ask the trainer or manager to review an uncertain payment outcome.",
+        "done": "Outcome or next action recorded against the correct member.",
+        "links": [
+          {
+            "t": "Ezidebit payments / direct debits",
+            "u": "https://docs.google.com/document/d/1gaEQ1NaYoebU0YradhZ2-pIVUD7mUx9W8SUZyDjYWbI/edit",
+            "k": "doc"
+          },
+          {
+            "t": "Failed-payment video",
+            "u": "",
+            "k": "video"
+          },
+          {
+            "t": "Pending-payment video",
+            "u": "",
+            "k": "video"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "clubworx-analysis",
+    "group": "Clubworx & Waivers",
+    "title": "Clubworx Analysis",
+    "note": "Do this every shift",
+    "cards": [
+      {
+        "h": "Why it matters",
+        "sub": "Removes mistakes, keeps members happy, and helps the team understand what’s happening in the gym.",
+        "links": [
+          {
+            "t": "Clubworx Analysis — PDF",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1nWKL28wb-uYfow7pduA2-tVSuXluB0BfOCX9Yn4z0D8/edit?tab=t.0"
+          },
+          {
+            "t": "Clubworx Analysis — Video",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/6quQN9Ad"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "clubworx-howto",
+    "group": "Clubworx & Waivers",
+    "title": "Clubworx How-Tos",
+    "note": "",
+    "cards": [
+      {
+        "h": "Working in Clubworx",
+        "links": [
+          {
+            "t": "How to create a new waiver",
+            "k": "doc",
+            "u": ""
+          },
+          {
+            "t": "How to adjust a waiver",
+            "k": "doc",
+            "u": ""
+          },
+          {
+            "t": "Waiver Types Explained",
+            "k": "link",
+            "u": "#waivers"
+          },
+          {
+            "t": "How to send a bulk Email or Text",
+            "k": "doc",
+            "u": ""
+          },
+          {
+            "t": "How to build a report",
+            "k": "doc",
+            "u": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "membership-types",
+    "group": "Clubworx & Waivers",
+    "title": "Membership Types",
+    "note": "Prices · waivers · discounts",
+    "cards": [
+      {
+        "h": "Pricing & memberships",
+        "links": [
+          {
+            "t": "Membership Prices",
+            "k": "doc",
+            "u": ""
+          },
+          {
+            "t": "6 & 12 month memberships — PDF",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1Zi_UeT6fX84fzy8FmTW_pd9DOtjG6_n3GZ0QP65H5TU/edit?usp=sharing"
+          },
+          {
+            "t": "Review Waivers — Check List",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1Zi_UeT6fX84fzy8FmTW_pd9DOtjG6_n3GZ0QP65H5TU/edit?usp=sharing"
+          },
+          {
+            "t": "Upfront payments — members",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1TD5r6EaclCui4H6dhEbYuWJa5MOorjO74ux40ZS8dr0/edit?tab=t.0"
+          },
+          {
+            "t": "Paying with business — sponsor 12 mths",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/15IaPE58JYzCZPJhqWNKqL9c5D2i_jyfOI2EhXTQh5B8/edit?tab=t.0"
+          },
+          {
+            "t": "Family Discounts",
+            "k": "sheet",
+            "u": "https://docs.google.com/spreadsheets/d/1z6VtArvVm_OuapfKdcj2rUjKQwiRSvNI5Rd_QUoHrBk/edit?gid=0#gid=0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "waivers",
+    "group": "Clubworx & Waivers",
+    "title": "Waiver Types Explained",
+    "note": "Reference only • confirm the current form in Clubworx with your trainer",
+    "custom": "waivers"
+  },
+  {
+    "id": "kickstarter",
+    "group": "Programs",
+    "title": "Kickstarter Program",
+    "note": "Trial → rollover",
+    "cards": [
+      {
+        "h": "Kickstarter",
+        "links": [
+          {
+            "t": "Kickstarter Protocol — Handbook",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1shEPW-WJSaY3ShHhGd9faXxpiU5fNlrVvMoK8a0FyIg/edit?tab=t.0"
+          },
+          {
+            "t": "How to send / fill out a Kickstarter Waiver",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/NQuxQ6ne"
+          },
+          {
+            "t": "Approve a Kickstarter Waiver — direct debit",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/YEuRq55q"
+          },
+          {
+            "t": "Approve a Kickstarter Waiver — no deposit",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/QwuEvOXE"
+          },
+          {
+            "t": "Approve a Kickstarter Waiver — Upfront",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/geud9L0w"
+          },
+          {
+            "t": "For new member — Check list",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1W-P7sZFd0jzQ9TCjndr-pNNtsc9H5Dcxn27aKp-R--M/edit?usp=sharing"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "urban-warrior",
+    "group": "Programs",
+    "title": "Urban Warrior Program",
+    "note": "Not currently running",
+    "cards": [
+      {
+        "h": "Urban Warrior",
+        "links": [
+          {
+            "t": "Urban Warrior — pre-start check list",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1wwYeOhuFXlzQeUzqa_6W_oejPgqJHhbq3LS7BZyjIxE/edit?usp=sharing"
+          },
+          {
+            "t": "Dates and prices — 2025",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/13_IVQOG-BdaagmblVf0rHOUGCIc6wfBx4rvBt4hibSo/edit?tab=t.0"
+          },
+          {
+            "t": "Current Member — Flow Chart",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1QxAIlsi-hjCEULXHdr1TqbyBhVBbNj3p/edit"
+          },
+          {
+            "t": "New Member — Flow Chart",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1yhNwuUNF-sFStpRsxe6zRd1cztPXoklh/edit"
+          },
+          {
+            "t": "How to adjust Urban Warrior Waiver & memberships for next event",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/YEuWl4Ww"
+          },
+          {
+            "t": "Urban Warrior Handbook — for staff",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1wmxkj81TTYr1erFDimU7z3i2wWpZm7hmKhsM1uGTqZc/edit?tab=t.0#heading=h.jdnxrovwdg7"
+          },
+          {
+            "t": "Urban Warrior Member Handbook",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1zLFkGo4P_VVFOQ-B_u7_qSBBmQyMX2H-9SfLBRh_17g/edit?tab=t.0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kids",
+    "group": "Programs",
+    "title": "Kids Programs",
+    "note": "Waivers · trials · memberships",
+    "cards": [
+      {
+        "h": "Getting kids started",
+        "links": [
+          {
+            "t": "Kids and Teens — Flow Chart",
+            "k": "doc",
+            "u": "https://docs.google.com/drawings/d/1i-9uNQM6QZM689W0kSTAJszIMtjJMDVmk_IHrXvw7w0/edit?usp=sharing"
+          },
+          {
+            "t": "Add a non-attending parent and child manually",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/04uL49n0"
+          },
+          {
+            "t": "Send a waiver for a child — Two week Trial (New Student)",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/YEuXDjrG"
+          },
+          {
+            "t": "How to approve a New Student Waiver for a child",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/L1uWAdmd"
+          },
+          {
+            "t": "Adding a child — 2 week Trial Membership",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/L1uWABYz"
+          },
+          {
+            "t": "How to approve a child waiver — direct debit or upfront",
+            "k": "video",
+            "u": ""
+          },
+          {
+            "t": "Kids Waiver Error — Video",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/eDu85mnx"
+          },
+          {
+            "t": "Kids waiver — Check sheet",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/13swZu2uT4U2EeRg4q7ebBIpfETljeBY1FltZJ6xpJfM/edit?usp=sharing"
+          }
+        ]
+      },
+      {
+        "h": "Adult & child both training",
+        "links": [
+          {
+            "t": "Same membership",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/kpuKPPwQ"
+          },
+          {
+            "t": "Different memberships",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/X6uexxwb"
+          },
+          {
+            "t": "Kids (6–9 yrs) — Upfront",
+            "k": "doc",
+            "u": "https://share.getcloudapp.com/llu5xr8E"
+          },
+          {
+            "t": "Kids / Cadets / Teens — Direct Debit",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/RBuYe8NY"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "grading",
+    "group": "Programs",
+    "title": "Grading",
+    "note": "",
+    "cards": [
+      {
+        "h": "Grading day",
+        "links": [
+          {
+            "t": "Grading Procedure",
+            "k": "doc",
+            "u": ""
+          },
+          {
+            "t": "Grading Sheet for the Day",
+            "k": "sheet",
+            "u": ""
+          },
+          {
+            "t": "Kids Grading Syllabus",
+            "k": "doc",
+            "u": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pt-and-vouchers",
+    "group": "Programs",
+    "title": "PT Sessions & Vouchers",
+    "note": "",
+    "cards": [
+      {
+        "h": "Personal Training",
+        "links": [
+          {
+            "t": "How to add a PT session & payment to Clubworx — Video",
+            "k": "video",
+            "u": ""
+          }
+        ]
+      },
+      {
+        "h": "Government Vouchers",
+        "links": [
+          {
+            "t": "QLD — Play On Vouchers, how to redeem",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1aMxWSjICses3fgomQ7FsStARFDwVXz6mm7VkDdAWmNo/edit?usp=drivesdk"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "equipment-sales",
+    "group": "Sales & Stock",
+    "title": "Equipment Sales",
+    "note": "POS · EFTPOS · reconciliation",
+    "cards": [
+      {
+        "h": "Selling & reconciling",
+        "links": [
+          {
+            "t": "Price List",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1WJhmq_CGhtUSbO0vmU1z5ixl9d9waaofGjLTRDQh8sk/edit?tab=t.0"
+          },
+          {
+            "t": "Entering a sale — via Clubworx POS",
+            "k": "link",
+            "u": "https://drive.google.com/file/d/1EaVs8D-YCJa9KVOXoIoo2QEHELITGJPR/view"
+          },
+          {
+            "t": "How to use the EFTPOS machine",
+            "k": "doc",
+            "u": ""
+          },
+          {
+            "t": "Till Reconciliation — Cash Weekly sales sheet PDF",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/12YxSvA3md1gSGsR699UY1wdjrHU7v7W6AqTrloiKbKU/edit?usp=sharing"
+          },
+          {
+            "t": "Overview of Equipment — explained",
+            "k": "link",
+            "u": "https://drive.google.com/file/d/1J4jQUNGM4Ie8nzoOczWT9fgEfBFeHrVb/view?usp=sharing"
+          },
+          {
+            "t": "KPI — Equipment Sales",
+            "k": "doc",
+            "u": ""
+          },
+          {
+            "t": "Event Sales — Procedure",
+            "k": "sheet",
+            "u": "https://docs.google.com/spreadsheets/d/1iwCBkDVuXEr46oThBPAi9jQg5O9C-oRRYltHhuCTLDA/edit?usp=sharing"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "stock",
+    "group": "Sales & Stock",
+    "title": "Stock Control / Stock Take",
+    "note": "",
+    "cards": [
+      {
+        "h": "Stock",
+        "links": [
+          {
+            "t": "New Stock Arrivals",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1F3gKPERTkcpygNpiOpYlyO9qtc5Z_G4oaxGnNy3rF9E/edit?tab=t.0"
+          },
+          {
+            "t": "Stocktake Sheet",
+            "k": "sheet",
+            "u": "https://docs.google.com/spreadsheets/d/1o_Kf-GloFmSzVbv60qm_Cr1LOT4j3JHFa66olbNRjt0/edit?usp=sharing"
+          },
+          {
+            "t": "Stocktake Procedure — PDF",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1dU8q1fHZPBwBtMvkdZ_7lgx4ns22RqZknEjzIVHo1XE/edit?usp=sharing"
+          },
+          {
+            "t": "Grading Singlets Stocktake",
+            "k": "sheet",
+            "u": "https://docs.google.com/spreadsheets/d/1l7IjITYLZPxr-3mcxmI5PdlVPVI0g4COcAnIsRiidtk/edit?usp=sharing"
+          },
+          {
+            "t": "Stock ordering",
+            "k": "doc",
+            "u": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sequences",
+    "group": "Marketing & Events",
+    "title": "Email Sequences",
+    "note": "Automated member journeys",
+    "cards": [
+      {
+        "h": "Sequence set-up",
+        "links": [
+          {
+            "t": "Sequences Part 1 — Message Template Set-up",
+            "k": "video",
+            "u": ""
+          },
+          {
+            "t": "Sequence Part 2 — Sequence Set-up",
+            "k": "video",
+            "u": ""
+          },
+          {
+            "t": "How to upload an image for Bulk Emails",
+            "k": "video",
+            "u": ""
+          },
+          {
+            "t": "How to add a video to YouTube for email sequencing",
+            "k": "video",
+            "u": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "social-media",
+    "group": "Marketing & Events",
+    "title": "Social Media",
+    "note": "",
+    "cards": [
+      {
+        "h": "Socials",
+        "links": [
+          {
+            "t": "Social Media Responsibilities — PDF",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1CpuH3u53S6g24nLHSpgYAtm03vmvGRYBeR8IXDe2PuY/edit?usp=sharing"
+          },
+          {
+            "t": "Facebook Group for admin purposes — Video",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/rRuOB5zx"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "social-events",
+    "group": "Marketing & Events",
+    "title": "Social Events",
+    "note": "",
+    "cards": [
+      {
+        "h": "Events",
+        "links": [
+          {
+            "t": "Social Event Procedure",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1iqPutoFJqsuBS0MikuW-i1aL6jSKzQwtnWsrNMK-C94/edit?usp=sharing"
+          },
+          {
+            "t": "Social Events Form — PDF",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1azQ9X2Q3Q9L2AmN0woyN-Yk_Lxk2t65tT_3fW7GKIKw/edit?usp=sharing"
+          },
+          {
+            "t": "Yearly Social Events Calendar",
+            "k": "sheet",
+            "u": "https://docs.google.com/spreadsheets/d/1Uhe2wu6iz2BLXZ2ITXq__jr4h8CtQTKe/edit?usp=sharing&ouid=100684694802703214667&rtpof=true&sd=true"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "reception-sops",
+    "group": "Reference & Handover",
+    "title": "Reception SOP Library",
+    "note": "Linked source documents",
+    "cards": [
+      {
+        "h": "Open, set up & close",
+        "links": [
+          {
+            "t": "Open Gym Procedure — Miami",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1zINCE4SLuXpVK43-ZDUmxsjTGjqq0QiH/edit?usp=drivesdk"
+          },
+          {
+            "t": "Main Computer Set-up",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1slF5UJhw_9g75RriyUtuAHsegXnw-aOQ/edit?usp=drivesdk"
+          },
+          {
+            "t": "TV Slideshow — Change / Edit",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1UdFJy0FnDlGntGoMr0qnGGObouCoV5MXMg2hzokCFZ4/edit?usp=drivesdk"
+          },
+          {
+            "t": "iPad Kiosk Page",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1g5_HVdiJByx8X2YhHhOtK9JeUFaig2yth_a2uQaP_nE/edit?usp=drivesdk"
+          }
+        ]
+      },
+      {
+        "h": "Daily service & administration",
+        "links": [
+          {
+            "t": "Front Desk Daily Duties Checklist",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1ZorHWLC28qJ3n7Vqdghr7ZOcyUfOuV-DmhMzp1ZZHsY/edit?usp=drivesdk"
+          },
+          {
+            "t": "Customer Service",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1nHJCLt3mzsHuxTJRSq40PbPvIiO8701ArTtQLGMVsOo/edit?usp=drivesdk"
+          },
+          {
+            "t": "Email Procedures",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1ku8H5Z7nei0-mj1znY4QK01v9S7_Z8Bn/edit?usp=drivesdk"
+          },
+          {
+            "t": "Cleanliness of Reception & Shop Area",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1fPebBOKx053UF3S7AbYSo127ZBPvF--f/edit?usp=drivesdk"
+          }
+        ]
+      },
+      {
+        "h": "Members, questions & safety",
+        "links": [
+          {
+            "t": "New Member Procedure",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1T-qMFyRSfro2-5ytvmVpHtJJZOAcRDwcWWwilpUbn4k/edit?usp=drivesdk"
+          },
+          {
+            "t": "Common General Questions",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1x2qpEeuvH68LevUIvweaxdUQZQ6g0Seb2m_cILbQ6w4/edit?usp=drivesdk"
+          },
+          {
+            "t": "Maintenance or Other OHS",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1TW-TPbcbG-dkLhRu8-Ts7_SPFGR_z8Ck-mNL3m8zDvk/edit?usp=drivesdk"
+          }
+        ]
+      },
+      {
+        "h": "Cash, vouchers & reference",
+        "links": [
+          {
+            "t": "End of Week Cash Reconcile",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/18V7m8iyLuXXHg4dhGe3QWzaEkAtslVOAKg1f2nx5CJQ/edit?usp=drivesdk"
+          },
+          {
+            "t": "Miami — Play On Vouchers",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1aMxWSjICses3fgomQ7FsStARFDwVXz6mm7VkDdAWmNo/edit?usp=drivesdk"
+          },
+          {
+            "t": "Reception SOP Folder — all documents",
+            "k": "folder",
+            "u": "https://drive.google.com/drive/folders/1Np0xJiGjNyVFmeKxuu4nXloBVMVHNf00?usp=drive_link"
+          },
+          {
+            "t": "Clubworx SOP Folder",
+            "k": "folder",
+            "u": "https://drive.google.com/drive/folders/1GI1sWGpIKSEUIOLi2D8YpyOhTDMnK8HW"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "training",
+    "group": "Reference & Handover",
+    "title": "Reception / Front Desk Handover",
+    "note": "Proposed checklist • complete with the outgoing and incoming Front Desk staff",
+    "cards": [
+      {
+        "h": "Capture reception knowledge",
+        "steps": [
+          "List the duties Reception / Front Desk actually owns, how often they happen and what triggers them.",
+          "Walk through current open work and identify the next action, new owner and due date in the existing records.",
+          "Demonstrate common exceptions: failed check-in, missing waiver, conflicting dates, payment question and cancellation during suspension.",
+          "Confirm weekly rotations, stock suppliers, current offers, escalation contacts and the handover location."
+        ],
+        "done": "Each recurring duty and outstanding case has an agreed new owner.",
+        "links": [
+          {
+            "t": "Source procedures",
+            "u": "#reception-sops",
+            "k": "link"
+          },
+          {
+            "t": "Shift handover template",
+            "u": "#shift-handover",
+            "k": "link"
+          }
+        ]
+      },
+      {
+        "h": "Demonstrate the essentials",
+        "steps": [
+          "Open and close the gym; reconcile the till.",
+          "Read notes, handle an enquiry and complete class attendance.",
+          "Review a waiver and new-member record with the trainer.",
+          "Demonstrate a suspension, cancellation review and membership change under supervision.",
+          "Complete Clubworx Analysis, weekly duties and a shift handover."
+        ],
+        "done": "Record Observe → Practise → Demonstrate → Trainer / date in the team’s approved training record.",
+        "links": [
+          {
+            "t": "Every Shift",
+            "u": "#weekly",
+            "k": "link"
+          },
+          {
+            "t": "Member requests",
+            "u": "#quick-actions",
+            "k": "link"
+          }
+        ]
+      },
+      {
+        "h": "Confirm before independent shifts",
+        "steps": [
+          "Reception / Front Desk training support, escalation route and backup cover.",
+          "Access to required systems and trackers using the Urban Muaythai account where applicable.",
+          "Current cancellation notice wording and which source takes precedence.",
+          "Mirror-cleaning frequency: daily checklist says daily; weekly checklist lists Wednesday.",
+          "Current Week 1 / Week 2 and fortnightly cleaning rotation dates.",
+          "Current pricing, program dates, waiver forms and any remaining missing guides."
+        ],
+        "done": "A manager or trainer has resolved the open questions and recorded the answers.",
+        "links": [
+          {
+            "t": "Daily source checklist",
+            "u": "https://docs.google.com/document/d/1ZorHWLC28qJ3n7Vqdghr7ZOcyUfOuV-DmhMzp1ZZHsY/edit",
+            "k": "doc"
+          },
+          {
+            "t": "Weekly source checklist",
+            "u": "https://docs.google.com/document/d/1gMLVWxIvI-NTPSV9ft6JYcomZWzDNZxkPwNIREAuuJU/edit",
+            "k": "doc"
+          },
+          {
+            "t": "Cancellation procedure requiring review",
+            "u": "https://docs.google.com/document/d/1T_7qnI8a4NulZQPnivvfQ99NqAtYWPysfxmD2IYpYCY/edit",
+            "k": "doc"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "guides-needed",
+    "group": "Reference & Handover",
+    "title": "Guides Still Needed",
+    "note": "Assign a guide owner during handover",
+    "cards": [
+      {
+        "h": "How to create a new waiver",
+        "sub": "Clubworx How-Tos",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "How to adjust a waiver",
+        "sub": "Clubworx How-Tos",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "How to send a bulk Email or Text",
+        "sub": "Clubworx How-Tos",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "How to build a report",
+        "sub": "Clubworx How-Tos",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "Membership Prices",
+        "sub": "Membership Types",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "Failed-payment video",
+        "sub": "Member Actions",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "Pending-payment video",
+        "sub": "Member Actions",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "How to approve a child waiver — direct debit or upfront",
+        "sub": "Kids Programs",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "Grading Procedure",
+        "sub": "Grading",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "Grading Sheet for the Day",
+        "sub": "Grading",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "Kids Grading Syllabus",
+        "sub": "Grading",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "How to add a PT session & payment to Clubworx — Video",
+        "sub": "PT Sessions & Vouchers",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "How to use the EFTPOS machine",
+        "sub": "Equipment Sales",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "KPI — Equipment Sales",
+        "sub": "Equipment Sales",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "Stock ordering",
+        "sub": "Stock Control / Stock Take",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "Sequences Part 1 — Message Template Set-up",
+        "sub": "Email Sequences",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "Sequence Part 2 — Sequence Set-up",
+        "sub": "Email Sequences",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "How to upload an image for Bulk Emails",
+        "sub": "Email Sequences",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      },
+      {
+        "h": "How to add a video to YouTube for email sequencing",
+        "sub": "Email Sequences",
+        "steps": [
+          "Ask the trainer for the current approved procedure or demonstration.",
+          "Record the source link, owner and review date when this guide is ready."
+        ],
+        "links": []
+      }
+    ]
+  }
 ];
-
-/* ---- weekly schedule (own renderer) ---- */
 const WEEK = [
- {d:"Every shift", items:["Open and set up the gym, reception computers and iPads","Check Clubworx notes at the start of shift","Check Gmail several times; monitor and reply to SMS","Complete flags and dated tasks; record membership conversations in contact notes","Reconcile the till at the beginning and end of the shift","Check the online portal, restock shelves and keep reception presentable"]},
- {d:"Before every class", items:["Be at reception <b>15 minutes before check-in</b>","Greet members by name with eye contact and a warm welcome","Handle sales, questions and member needs","Complete roll call / class attendance to <b>100%</b>","Resolve or document any check-in flag"]},
- {d:"End of shift", items:["Complete Clubworx Analysis","Verify membership dates, fees and first debit dates","Confirm suspensions and cancellations were applied and correspondence sent","Add every new member to the New Member Spreadsheet","Charge reception devices, shut down desks and leave equipment tidy","Close lights, windows and roller door; remove rubbish, vacuum and mop"]},
- {d:"Thursday", items:["Complete stocktake","Finish the end-of-week cash reconciliation","Email the completed cash sheet to the Operations Manager","Clear the cash sheet data ready for the new week"]},
- {d:"Friday", items:["Tidy the lost-property bin","Send the lost-property photo to people who attended in the past seven days","Move items to the upstairs box for one week","Discard items retained from the previous Friday in line with the checklist"]},
- {d:"As needed", asneed:true, items:["Approve and merge waivers; apply the correct start and debit dates","Process upfront payments correctly","Issue and record scan tags; take and upload profile photos","Process new memberships, suspensions, cancellations and member-detail changes","Log and escalate maintenance / OHS issues","Capture daily photos or video and keep posters current"]},
+  {
+    "d": "Start & during the shift",
+    "items": [
+      "Open and set up the gym, reception computers and iPads",
+      "Check Clubworx notes at the start of shift",
+      "Check Gmail several times; monitor and reply to SMS",
+      "Complete flags and dated tasks; record membership conversations in contact notes",
+      "Reconcile the till at the beginning and end of the shift",
+      "Check the online portal, restock shelves and keep reception presentable"
+    ]
+  },
+  {
+    "d": "Before every class",
+    "items": [
+      "Be at reception <b>15 minutes before check-in</b>",
+      "Greet members by name with eye contact and a warm welcome",
+      "Handle sales, questions and member needs",
+      "Complete roll call / class attendance to <b>100%</b>",
+      "Resolve or document any check-in flag"
+    ]
+  },
+  {
+    "d": "End of shift",
+    "items": [
+      "Complete Clubworx Analysis",
+      "Verify membership dates, fees and first debit dates",
+      "Confirm suspensions and cancellations were applied and correspondence sent",
+      "Reconcile the till and record the result in the weekly cash sheet",
+      "Add every new member to the New Member Spreadsheet",
+      "Charge reception devices, shut down desks and leave equipment tidy",
+      "Close lights, windows and roller door; remove rubbish, vacuum and mop"
+    ]
+  },
+  {
+    "d": "As needed",
+    "asneed": true,
+    "items": [
+      "Review waivers against the correct member; merge only after confirming it is the same person",
+      "Process upfront payments correctly",
+      "Issue and record scan tags; take and upload profile photos",
+      "Process new memberships, suspensions, cancellations and member-detail changes",
+      "Log and escalate maintenance / OHS issues",
+      "Capture daily photos or video and keep posters current"
+    ]
+  }
 ];
-
-/* ---- waiver reference (own renderer) ---- */
 const WAIVERS = [
- {tag:"Free Trial / Buddy Sessions", use:"Trial Session Sports Waiver", u:"", pts:[
-   "For students attending a <b>free trial</b> or free buddy session",
-   "For students who have <b>NOT paid</b> any money for class",
-   "Keeps the student as a <b>PROSPECT</b> — not yet on any membership",
-   "Allows the student to be checked in for a FREE class",
-   "Allows sales follow-ups so every attempt to sign them up can be made",
-   "Prospects link to automated email sequences based on their stage",
- ]},
- {tag:"Deposit Paid Upfront / Casual / 10 Pack", use:"New Student Waiver", u:"", pts:[
-   "For students who paid an upfront deposit or pay per session / 10 pack",
-   "Converts a prospect <b>automatically to a member</b>",
-   "<b>Does not</b> require the student to enter payment details",
-   "<b>Does not</b> put the student on direct debit",
-   "Allows a manual membership for the sessions they’ve paid for",
-   {warn:"IS NOT to be used for FREE TRIAL classes"},
- ]},
- {tag:"Kickstarter Program (with Roll Over)", use:"Kickstarter Program Accelerate", u:"", pts:[
-   "For students paying the Kickstarter deposit upfront then rolling over to weekly direct debit after 28 days — or paying weekly from the outset",
-   "<b>Requires</b> the student to enter payment details (bank or card)",
-   "Converts a prospect <b>automatically to a member</b>",
- ]},
- {tag:"Urban Warrior", use:null, u:"", pts:[
-   "Pick the waiver that matches how they’re signing up:",
-   "<b>New Member — Upfront Payments</b> — pay the program in full upfront",
-   "<b>New Member — Weekly Payments</b> — pay in weekly instalments",
-   "<b>Registration (Current Members)</b> — existing Urban members signing up",
-   "<b>Previous Participants</b> — done a program before, NOT a current member",
- ]},
- {tag:"Thailand Tour", use:null, u:"", pts:[
-   "For students wishing to book our annual trip to Thailand",
-   "<b>Thailand Tour</b> registration waiver",
- ]},
+  {
+    "tag": "Free Trial / Buddy Sessions",
+    "use": "Trial Session Sports Waiver",
+    "u": "",
+    "pts": [
+      "For students attending a <b>free trial</b> or free buddy session",
+      "For students who have <b>NOT paid</b> any money for class",
+      "Keeps the student as a <b>PROSPECT</b> — not yet on any membership",
+      "Allows the student to be checked in for a FREE class",
+      "Allows sales follow-ups so every attempt to sign them up can be made",
+      "Prospects link to automated email sequences based on their stage"
+    ]
+  },
+  {
+    "tag": "Deposit Paid Upfront / Casual / 10 Pack",
+    "use": "New Student Waiver",
+    "u": "",
+    "pts": [
+      "For students who paid an upfront deposit or pay per session / 10 pack",
+      "Converts a prospect <b>automatically to a member</b>",
+      "<b>Does not</b> require the student to enter payment details",
+      "<b>Does not</b> put the student on direct debit",
+      "Allows a manual membership for the sessions they’ve paid for",
+      {
+        "warn": "IS NOT to be used for FREE TRIAL classes"
+      }
+    ]
+  },
+  {
+    "tag": "Kickstarter Program (with Roll Over)",
+    "use": "Kickstarter Program Accelerate",
+    "u": "",
+    "pts": [
+      "For students paying the Kickstarter deposit upfront then rolling over to weekly direct debit after 28 days — or paying weekly from the outset",
+      "<b>Requires</b> the student to enter payment details (bank or card)",
+      "Converts a prospect <b>automatically to a member</b>"
+    ]
+  },
+  {
+    "tag": "Urban Warrior",
+    "use": null,
+    "u": "",
+    "pts": [
+      "Pick the waiver that matches how they’re signing up:",
+      "<b>New Member — Upfront Payments</b> — pay the program in full upfront",
+      "<b>New Member — Weekly Payments</b> — pay in weekly instalments",
+      "<b>Registration (Current Members)</b> — existing Urban members signing up",
+      "<b>Previous Participants</b> — done a program before, NOT a current member"
+    ]
+  },
+  {
+    "tag": "Thailand Tour",
+    "use": null,
+    "u": "",
+    "pts": [
+      "For students wishing to book our annual trip to Thailand",
+      "<b>Thailand Tour</b> registration waiver"
+    ]
+  }
 ];
-
 /* ============================ ICONS ============================ */
 const IC={
  video:'<path d="M4 4h16v16H4z" fill="none"/><path d="M9 8l7 4-7 4V8z"/>',
@@ -640,12 +1962,12 @@ function icon(k){return '<svg viewBox="0 0 24 24" fill="currentColor">'+(IC[k]||
 
 function linkRow(item){
   const has=item.u && item.u.trim()!=="";
-  const tag='a';
-  const attr=has?` href="${item.u}"${item.u.startsWith('#')?'':' target="_blank" rel="noopener"'}`:' role="link" aria-disabled="true"';
+  const tag=has?'a':'span';
+  const attr=has?` href="${item.u}"${item.u.startsWith('#')?'':' target="_blank" rel="noopener"'}`:' aria-label="Guide needed: '+item.t+'"';
   return `<${tag} class="lnk${has?'':' pending'}" data-k="${item.k}"${attr}>`
     +`<span class="ic">${icon(item.k)}</span>`
     +`<span class="t">${item.t}</span>`
-    +(has?ARW:'')+`</${tag}>`;
+    +(has?ARW:'<span class="missing-label">Guide needed</span>')+`</${tag}>`;
 }
 
 function sectionHead(s){
@@ -656,12 +1978,14 @@ function renderSection(s){
   let inner='';
   if(s.tiles){
     inner='<div class="tiles">'+s.tiles.map(t=>
-      `<div class="tile"><div class="cap"><h3>${t.h}</h3></div><div class="body"><div class="links">`
+      `<div class="tile"><div class="cap"><h3>${t.h}</h3></div><div class="body">${t.sub?`<p class="sub">${t.sub}</p>`:''}${t.done?`<p class="done"><b>Done when:</b> ${t.done}</p>`:''}<div class="links">`
       +t.links.map(linkRow).join('')+`</div></div></div>`).join('')+'</div>';
   } else {
     inner='<div class="cards">'+s.cards.map(c=>{
       let b=`<div class="card"><h3>${c.h}</h3>`;
       if(c.sub) b+=`<p class="sub">${c.sub}</p>`;
+      if(c.steps) b+=`<ol class="steps">${c.steps.map(t=>`<li>${t}</li>`).join('')}</ol>`;
+      if(c.done) b+=`<p class="done"><b>Done when:</b> ${c.done}</p>`;
       b+=`<div class="links">`+c.links.map(linkRow).join('')+`</div></div>`;
       return b;
     }).join('')+'</div>';
@@ -685,7 +2009,7 @@ function renderWaivers(s){
   const el=document.createElement('section');
   el.className='section';el.id=s.id;el.dataset.group=s.group;
   const cards=WAIVERS.map(w=>{
-    const use=w.use?`<p class="use">Student fills out: <a href="${w.u||'#'}"${w.u?' target="_blank" rel="noopener"':''}>${w.use}</a></p>`:'';
+    const use=w.use?`<p class="use">Form name: ${w.u?`<a href="${w.u}" target="_blank" rel="noopener">${w.use}</a>`:`<strong>${w.use}</strong>`}. Confirm the current form in Clubworx.</p>`:'';
     const pts=w.pts.map(p=> typeof p==='object'?`<li class="warn">${p.warn}</li>`:`<li>${p}</li>`).join('');
     return `<div class="wcard"><p class="wtag">${w.tag}</p>${use}<ul>${pts}</ul></div>`;
   }).join('');
@@ -758,46 +2082,27 @@ function filter(){
   const q=search.value.trim().toLowerCase();
   clearBtn.style.display=q?'block':'none';
   document.querySelector('.kbd').style.display=q?'none':'flex';
-  let shown=0;
-  allLinks.forEach(l=>{
-    const t=l.querySelector('.t');
-    const txt=t? t.dataset.orig : l.textContent;
-    const plain=txt.replace(/<[^>]+>/g,'').toLowerCase();
-    const match=!q || plain.includes(q);
-    l.classList.toggle('hide',!match);
-    if(t) t.innerHTML=q?hl(txt,q):txt;
-    if(match) shown++;
+  const cards=[...document.querySelectorAll('.card,.tile,.wcard,.day')];
+  cards.forEach(c=>{
+    const sec=c.closest('.section');
+    const context=(sec?.querySelector('.section-head')?.textContent||'').toLowerCase();
+    const match=!q || c.textContent.toLowerCase().includes(q) || context.includes(q);
+    c.classList.toggle('hide',!match);
   });
-  /* hide empty cards/tiles */
-  document.querySelectorAll('.card,.tile').forEach(c=>{
-    const any=[...c.querySelectorAll('.lnk')].some(l=>!l.classList.contains('hide'));
-    c.classList.toggle('hide',!any && c.querySelectorAll('.lnk').length>0);
-  });
-  /* a search shows matches across every group; with no search, only the
-     active tab's sections are shown at all */
   sections.forEach(sec=>{
-    if(!q && sec.dataset.group!==activeGroup){sec.classList.add('hide');return;}
-    const hasLinks=sec.querySelectorAll('.lnk').length>0;
-    if(!hasLinks){ /* weekly + waivers: filter by text */
-      const on=!q || sec.textContent.toLowerCase().includes(q);
-      sec.classList.toggle('hide',!on);
-      return;
-    }
-    const anyCard=[...sec.querySelectorAll('.card,.tile')].some(c=>!c.classList.contains('hide'));
-    sec.classList.toggle('hide',!anyCard);
+    const match=cards.some(c=>c.closest('.section')===sec&&!c.classList.contains('hide'));
+    sec.classList.toggle('hide',q?!match:sec.dataset.group!==activeGroup);
   });
-  /* group dividers only matter once a search spans multiple groups */
-  document.querySelectorAll('.group-head').forEach(g=>{
-    if(!q){g.classList.add('hide');return;}
-    const anyVisible=sections.some(sec=>sec.dataset.group===g.dataset.group && !sec.classList.contains('hide'));
-    g.classList.toggle('hide',!anyVisible);
+  document.querySelectorAll('.group-head').forEach(g=>g.classList.toggle('hide',!q||!sections.some(s=>s.dataset.group===g.dataset.group&&!s.classList.contains('hide'))));
+  jumpTabs.querySelectorAll('.jump-tab').forEach(t=>{
+    const selected=!q&&t.dataset.group===activeGroup;
+    t.classList.toggle('on',selected);
+    t.setAttribute('aria-pressed',String(selected));
   });
-  jumpTabs.querySelectorAll('.jump-tab').forEach(t=>t.classList.toggle('on',!q && t.dataset.group===activeGroup));
-  const visSections=sections.filter(s=>!s.classList.contains('hide')).length;
-  empty.style.display=(q && shown===0 && visSections===0)?'block':'none';
-  meta.innerHTML=q
-    ? `<b>${shown}</b> match${shown===1?'':'es'} for “${search.value.trim()}”`
-    : `<b>${totalLinks}</b> links across <b>${sections.length}</b> sections. Press <b>/</b> to search.`;
+  const visibleCards=cards.filter(c=>!c.classList.contains('hide')&&!c.closest('.section').classList.contains('hide')).length;
+  empty.style.display=q&&visibleCards===0?'block':'none';
+  const ready=allLinks.filter(l=>l.hasAttribute('href')).length;
+  meta.textContent=q?visibleCards+' matching task / guide cards for “'+search.value.trim()+'”':ready+' available links • Search across all tasks and guides. Press / to search.';
 }
 filter();
 
