@@ -8,6 +8,9 @@ const { SECTIONS, WEEK, WAIVERS } = data;
 const doc = id => `https://docs.google.com/document/d/${id}/edit`;
 const link = (t, u, k = 'doc') => ({t, u, k});
 const refs = {
+  role: doc('1rTsqwmy2PChyDpzZaZaKK8g-rWdBVMu-nmXWB9jfckQ'),
+  managerRole: doc('112deEx6c4CkduuL3Lenkf83Yr9mOiv3CjB7LrbGKS_Y'),
+  handbook: 'https://drive.google.com/file/d/1LqxKJTXwo81FK6NN88Hvcrtn7y6Vm6k8/view',
   daily: doc('1ZorHWLC28qJ3n7Vqdghr7ZOcyUfOuV-DmhMzp1ZZHsY'),
   weekly: doc('1gMLVWxIvI-NTPSV9ft6JYcomZWzDNZxkPwNIREAuuJU'),
   suspension: doc('1x6H2UdQywhkSA7ZM9N8pQ1qHcTn5CUGTXymA3bBgDjY'),
@@ -18,7 +21,7 @@ const refs = {
   checks: doc('125qa3jhbxQSFZQpbR_kM0w0uMIPRfm8kEAPOce7tvwA'),
   bulk: doc('1X-KEmpsDMUe5Iz2BZTXGom7wlXWdneujFK1_nBspqTc'),
 };
-const GROUP_ORDER = ['Start Here','My Shift','Members & Check-In','Clubworx & Waivers','Programs','Sales & Stock','Marketing & Events','Reference & Handover'];
+const GROUP_ORDER = ['Role & Daily Checklist','Start Here','My Shift','Members & Check-In','Clubworx & Waivers','Programs','Sales & Stock','Marketing & Events','Reference & Handover'];
 const groups = {'Daily Basics':'My Shift','Reception SOP Library':'Reference & Handover','Check-In & Front Desk':'Members & Check-In','Clubworx Reference':'Clubworx & Waivers','Memberships & Waivers':'Clubworx & Waivers','Member Actions':'Members & Check-In','Programs & Sign-Ups':'Programs','Sales, Stock & Money':'Sales & Stock'};
 SECTIONS.forEach(s => s.group = groups[s.group] || s.group);
 const section = id => SECTIONS.find(s => s.id === id);
@@ -35,6 +38,27 @@ WEEK[2].items.splice(3, 0, 'Reconcile the till and record the result in the week
 WEEK[3].items[0] = 'Review waivers against the correct member; merge only after confirming it is the same person';
 
 SECTIONS.unshift(
+ {id:'job-description',group:'Role & Daily Checklist',title:'Job Description',note:'Audited from the current role document and Front of House handbook',cards:[
+  {h:'Purpose of the role',sub:'Front of House is the control point for member experience, operational accuracy and community culture.',steps:['Create a welcoming place where members and guests feel that they belong.','Act as the first point of contact and handle enquiries efficiently and professionally.','Support member relationships, sales, administration, gym presentation and community engagement.','Protect accurate member records and follow the approved process for each membership action.'],done:'Members are welcomed, helped and recorded correctly, and the gym is ready for every session.',links:[link('Source: Front of House job role',refs.role),link('Source: revised Front of House handbook',refs.handbook)]},
+  {h:'Reporting and working relationships',steps:['Reports to the Operations Manager.','Works with trainers, reception staff and management to deliver the member experience.','Front desk staff complete assigned procedures and record their work.','The Front of House / Gym Manager owns standards, allocation, checking, coaching and escalation.','Policy, pricing, refunds and matters outside delegated authority go to the approved senior owner.'],done:'Each recurring duty has an owner, and staff know who makes the final decision.',links:[link('Manager oversight source',refs.managerRole)]},
+  {h:'Role boundaries',steps:['Use approved systems and current procedures; do not invent policy or promise an uncertain outcome.','Do not keep member cases, passwords or payment details on this page.','Record membership conversations, decisions and follow-up in Clubworx or the approved tracker.','Escalate safeguarding, safety, serious complaints, disputed billing and unclear authority promptly.'],done:'The action is within authority, traceable in the correct record and escalated when required.',links:[link('When you need help','#help','link')]},
+ ]},
+ {id:'responsibilities-outcomes',group:'Role & Daily Checklist',title:'Responsibilities & Outcomes',note:'What the role owns and what good performance looks like',cards:[
+  {h:'Member experience',steps:['Greet members, non-members and guests warmly and by name where possible.','Manage check-in and ensure attendance matches the people training.','Guide new starters, introduce them to a trainer and help them settle into the community.','Answer enquiries accurately and resolve routine issues promptly.','Record complaints, lost property, repairs and important member conversations.'],done:'People feel welcomed and supported; attendance and follow-up are accurate.'},
+  {h:'Memberships, records and payments',steps:['Enrol new members and maintain accurate member details.','Review and approve waivers using the correct member, dates and payment setup.','Process authorised upgrades, downgrades, suspensions and cancellations using the linked procedure.','Manage emails, SMS, tasks, calls and financial transactions.','Maintain Clubworx notes and approved spreadsheets so the member timeline is complete.'],done:'The request, signed authority, Clubworx action, payment effect, communication and follow-up agree.',links:[link('Common member requests','#quick-actions','link'),link('Clubworx Analysis','#clubworx-analysis','link')]},
+  {h:'Gym operations and presentation',steps:['Open and close the gym correctly.','Keep reception, equipment, member areas and facilities clean and presentable.','Reconcile the till and complete required cash records.','Monitor stock, restock shelves and report low stock or damaged equipment.','Maintain safeguarding, health and safety and incident-reporting standards.'],done:'The gym is safe, clean, stocked and ready; cash and incidents are accounted for.'},
+  {h:'Sales, community and promotion',steps:['Promote suitable memberships, equipment, events and campaigns accurately.','Support events, gradings and community activities.','Hold meaningful member conversations and celebrate progress.','Capture approved photos and video and send them through the agreed channel.','Help build member connections and retention, not just complete transactions.'],done:'Sales and promotion are accurate, member-centred and recorded where required.'},
+  {h:'Manager leadership and quality control',steps:['Allocate daily and weekly front desk duties.','Observe punctuality, presentation, reliability, service and procedure use.','Review Clubworx Analysis, handovers, open tasks and recurring errors.','Correct authorised errors; coach and retrain staff when a procedure is missed.','Document staff meetings, training and recurring performance issues in the approved location.','Escalate unresolved performance or authority matters to the Operations Manager.'],done:'Front desk work is checked, errors have an owner and staff receive timely coaching.',links:[link('Manager oversight source',refs.managerRole),link('Reception / Front Desk handover','#training','link')]},
+  {h:'Current outcome measures — confirm owner and reporting source',steps:['Direct-debit member total and quarterly growth goals.','Attrition below 5% and suspension rate below 10%.','Kickstarter / Newbie rollover at 80% or better.','Equipment sales of $1,000 or more per week.','Social-event attendance target of 10% or better.','Two meaningful member conversations per shift.','Content target: revised handbook says 3 photos and 1 video per shift; the daily checklist uses different wording. Confirm one standard before approval.'],done:'Each approved measure has a definition, system of record, reporting frequency and accountable owner.',links:[link('Source: Front of House job role',refs.role),link('Source: revised Front of House handbook',refs.handbook)]},
+ ]},
+ {id:'daily-checklist',group:'Role & Daily Checklist',title:'Daily Checklist',note:'On-page working checklist • complete in this order each shift',cards:[
+  {h:'1. Prepare for the shift',sub:'Before members arrive',steps:['Be on time or early, in uniform, presentable and ready to help.','Check Slack and the agreed handover location for updates.','Read Clubworx notes, flags, dated tasks and outstanding work.','Check the Urban Muaythai Gmail inbox, SMS and tasks assigned to you.','Turn on lights, open the required windows and roller door, and place the bin outside where applicable.','Start computers, iPads, Clubworx Roll Call, music and other reception equipment.','Check reception, shop, fridge, bathrooms, waiting area and training space; clean, restock or report issues.'],done:'The gym, systems and Front of House are ready before the first member arrives.',links:[link('Original daily checklist',refs.daily),link('Front of House handbook',refs.handbook)]},
+  {h:'2. Run member check-in and service',sub:'Before and during every class',steps:['Stand at reception, greet members by name and help with questions.','Confirm every person checks into the correct class; compare the floor count with Clubworx attendance.','Address flags and record why anything cannot be completed.','Ensure members have the correct equipment and process authorised sales through POS.','Onboard new members: tour, introduction, photo, app / check-in setup and required member record.','Have at least two meaningful member conversations during the shift.','Promote current approved events or campaigns and give members a positive send-off.'],done:'Attendance matches the class, flags have outcomes and new members are correctly onboarded.'},
+  {h:'3. Complete Clubworx and member administration',steps:['Enter notes for every membership-related conversation on the correct member and date.','Approve waivers using the approved procedure; confirm identity before associating or merging any record.','Check membership start date, upfront payment, first debit date and recurring payment setup.','Apply authorised suspensions, cancellations and membership changes using the linked SOP and send confirmation.','Complete due tasks, SMS replies and relevant inbox actions.','Update the New Member Spreadsheet whenever a member signs up and complete other required daily spreadsheet entries.','Review failed-payment flags and assign or complete the required next action.'],done:'Member records, payments, communication and trackers tell the same complete story.',links:[link('Clubworx Analysis','#clubworx-analysis','link'),link('Member actions','#quick-actions','link')]},
+  {h:'4. Complete cash, stock and promotion checks',steps:['Reconcile the till at the beginning and end of the shift using the approved cash-sheet process.','Record each POS sale and review the required wallet / transaction report.','Restock equipment, apparel and the drinks fridge; report low stock.','Keep noticeboards and promotional material current and remove expired items.','Capture approved member, group or trainer content and send it through the agreed channel.'],done:'Cash reconciles, sales are recorded, stock is presentable and promotions are current.'},
+  {h:'5. Close and hand over',sub:'Before leaving',steps:['Complete Clubworx Analysis and correct or assign every identified issue.','Confirm emails, SMS, tasks, daily spreadsheets and member follow-ups are complete or handed over.','Vacuum and mop; tidy equipment, reception, waiting and training areas; empty rubbish and manage lost property.','Shut down computers and reception devices, and place iPads and phones on charge.','Turn off music, timer and lights; close windows, roller door and entry points using the approved site procedure.','Record every outstanding item with current status, next action, owner, due time and record location.'],done:'The gym is secure and ready for the next shift, with no invisible outstanding work.',links:[link('Shift handover','#shift-handover','link')]},
+  {h:'Confirm before this checklist is approved',sub:'Source conflicts or unclear legacy wording found during this audit',steps:['Confirm whether Slack, Miami inbox and GetFit inbox are all daily manager checks.','Confirm the exact wallet / transaction report referred to by “Check Reports — wallet”.','Confirm whether the Online Portal is still used and what action it requires.','Set one content target: daily checklist says 2–5 photos or videos and one per class; revised handbook says 3 photos and 1 video per shift.','Confirm mirror cleaning: daily checklist says daily; weekly checklist also assigns Wednesday.','Confirm the approved till / daily cash-sheet process and handover record location.','Confirm which tasks belong to Front Desk staff and which require manager approval.'],done:'Each item has an approved answer, owner, source link and review date.',links:[link('Original daily checklist',refs.daily),link('Front of House handbook',refs.handbook)]},
+ ]},
  {id:'start-here',group:'Start Here',title:'New to reception? Start here.',note:'A clear path through your first shifts',cards:[
   {h:'1. Get ready with your trainer',sub:'Before handling reception on your own',steps:['Confirm the gym location, shift times, assigned trainer and who covers reception during breaks.','Open Clubworx, Urban Muaythai Gmail and the required trackers with your trainer. Confirm access from your own authorised account.','Walk through opening, check-in, till reconciliation and closing together.'],done:'You can open the required tools and name the person who will help during your shift.',links:[link('Role & responsibilities','#your-role','link'),link('Systems & trackers','#tools','link')]},
   {h:'2. Follow the shift in order',sub:'Start → class check-in → end of shift',steps:['Read Clubworx notes, dated tasks and the previous shift’s outstanding work.','Follow Every Shift and the weekly duties for the day. Use the source procedure for each unfamiliar task.','Finish the audit, record what is complete and hand over anything outstanding with an owner and next action.'],done:'The next staff member can see what happened and what needs attention.',links:[link('Every Shift','#weekly','link'),link('Weekly duties','#weekly-duties','link'),link('Shift handover template','#shift-handover','link')]},
@@ -75,7 +99,7 @@ SECTIONS.push({id:'training',group:'Reference & Handover',title:'Training & Jako
 
 // Keep every remaining missing resource visible and searchable in one review queue.
 const missing = [];
-for (const s of SECTIONS) for (const c of s.cards || s.tiles || []) for (const l of c.links) if (!l.u) missing.push({section:s.title,task:l.t});
+for (const s of SECTIONS) for (const c of s.cards || s.tiles || []) for (const l of c.links || []) if (!l.u) missing.push({section:s.title,task:l.t});
 SECTIONS.push({id:'guides-needed',group:'Reference & Handover',title:'Guides Still Needed',note:'Assign a guide owner during handover',cards:missing.map(x=>({h:x.task,sub:x.section,steps:['Ask the trainer for the current approved procedure or demonstration.','Record the source link, owner and review date when this guide is ready.'],links:[]}))});
 SECTIONS.sort((a,b)=>GROUP_ORDER.indexOf(a.group)-GROUP_ORDER.indexOf(b.group));
 
@@ -84,7 +108,7 @@ out = out.replaceAll('Training & Jakob handover','Reception / Front Desk handove
 out = out.replace('<title>Urban Muaythai — Reception</title>','<title>Urban Muaythai — Reception / Front Desk</title>');
 out = out.replace('Front Desk Knowledge Base','Front Desk • Onboarding & Daily Work');
 out = out.replace('<h1>RECEP<em>TION</em></h1>','<h1>RECEP<em>TION</em> <span class="version">2.0</span></h1>');
-out = out.replace('<p class="tagline"><b>An eye for detail is critical for successful member management.</b> Use this page to find the right process fast, then follow the linked SOP as the source of truth.</p>','<p class="tagline"><b>Know what to do, find the steps, check the result.</b> New starters begin with Start Here. Each shift, use My Shift and open the linked procedure for the task.</p><p class="review-banner">Review draft · 22 October 2026 · Training sequence and handover standards need team review. Member terms, pricing and policy questions must be checked against current approved sources.</p>');
+out = out.replace('<p class="tagline"><b>An eye for detail is critical for successful member management.</b> Use this page to find the right process fast, then follow the linked SOP as the source of truth.</p>','<p class="tagline"><b>Know what to do, find the steps, check the result.</b> New starters begin with Role & Daily Checklist, then follow the shift and linked procedures.</p><p class="review-banner">Audit draft · 17 November 2026 · Job Description, Responsibilities & Outcomes and Daily Checklist are now on-page. Items marked for confirmation are not approved policy until resolved by the team.</p>');
 out = out.replace('Search suspensions, waivers, cash sheet, grading…','Search a task: check-in, cancellation, stocktake…');
 out = out.replace('<div class="searchmeta" id="searchmeta"></div>','<div class="searchmeta" id="searchmeta" role="status" aria-live="polite"></div>');
 out = out.replace('Links open in a new tab. The linked SOP is the source of truth; access remains controlled by Google Drive permissions.','External links open in a new tab. Use the current approved SOP and signed member terms. New training and handover guidance is proposed for team review. This page does not save task completion or member cases.');
@@ -92,6 +116,7 @@ out = out.replace('const tag=\'a\';',"const tag=has?'a':'span';");
 out = out.replace(`:' role="link" aria-disabled="true"'`, `:' aria-label="Guide needed: '+item.t+'"'`);
 out = out.replace("+(has?ARW:'')", "+(has?ARW:'<span class=\"missing-label\">Guide needed</span>')");
 out = out.replace('if(c.sub) b+=`<p class="sub">${c.sub}</p>`;', 'if(c.sub) b+=`<p class="sub">${c.sub}</p>`;\n      if(c.steps) b+=`<ol class="steps">${c.steps.map(t=>`<li>${t}</li>`).join(\'\')}</ol>`;\n      if(c.done) b+=`<p class="done"><b>Done when:</b> ${c.done}</p>`;');
+out = out.replace("c.links.map(linkRow).join('')", "(c.links||[]).map(linkRow).join('')");
 out = out.replace('`<div class="tile"><div class="cap"><h3>${t.h}</h3></div><div class="body"><div class="links">`','`<div class="tile"><div class="cap"><h3>${t.h}</h3></div><div class="body">${t.sub?`<p class="sub">${t.sub}</p>`:\'\'}${t.done?`<p class="done"><b>Done when:</b> ${t.done}</p>`:\'\'}<div class="links">`');
 out = out.replace('const use=w.use?`<p class="use">Student fills out: <a href="${w.u||\'#\'}"${w.u?\' target="_blank" rel="noopener"\':\'\'}>${w.use}</a></p>`:\'\';', 'const use=w.use?`<p class="use">Form name: ${w.u?`<a href="${w.u}" target="_blank" rel="noopener">${w.use}</a>`:`<strong>${w.use}</strong>`}. Confirm the current form in Clubworx.</p>`:\'\';');
 // A search must match context, instructions and headings, not only link labels.
@@ -138,11 +163,16 @@ out=out.replace('</style>',css+'\n</style>');
 fs.writeFileSync('index.html',out);
 fs.writeFileSync('REVIEW.txt',[
   'RECEPTION 2.0 — HANDOVER REVIEW',
-  '22 October 2026 | Urban Muaythai',
+  '17 November 2026 | Urban Muaythai',
   '',
   'Scope: Reviewed the live Reception 2.0 Google Site in Chrome using Urban Muaythai. source/reception-original.html preserves its complete embed source (123 resource rows across 21 sections). index.html is the proposed revised page. The user requested repository-only editing. No repository has been created remotely and nothing has been published or pushed.',
   '',
   'CHANGES PREPARED',
+  '- Added an on-page Job Description audited from the current Front of House role and revised handbook.',
+  '- Added on-page Responsibilities & Outcomes, including manager quality-control responsibilities and outcome measures requiring final owner / reporting confirmation.',
+  '- Added an ordered on-page Daily Checklist covering preparation, class check-in, Clubworx and member administration, cash / stock / promotion, closing and handover.',
+  '- Preserved source-document links for provenance, while the working instructions are now visible directly on the page.',
+  '- Flagged unclear or conflicting daily requirements together instead of silently choosing a policy.',
   '- Start Here: access, training sequence, first-shift path and where to record work.',
   '- Eight navigation groups; daily work is separated from reference and handover.',
   '- Shift handover template with current status, next action, owner, due time and record location.',
@@ -167,6 +197,9 @@ fs.writeFileSync('REVIEW.txt',[
   ...missing.map((x,i)=>`${i+1}. ${x.section}: ${x.task}`),
   '',
   'READ SOURCE DOCUMENTS',
+  'Front of House job role: '+refs.role,
+  'Manager oversight of receptionist role: '+refs.managerRole,
+  'Revised Front of House handbook: '+refs.handbook,
   'Daily checklist: '+refs.daily,
   'Weekly checklist: '+refs.weekly,
   'Suspension procedure: '+refs.suspension,
@@ -180,7 +213,7 @@ fs.writeFileSync('REVIEW.txt',[
   '',
   'To regenerate index.html from the preserved source and proposed changes: node build.cjs',
 ].join('\n'));
-const finalItems=SECTIONS.flatMap(s=>(s.cards||s.tiles||[]).flatMap(c=>c.links));
+const finalItems=SECTIONS.flatMap(s=>(s.cards||s.tiles||[]).flatMap(c=>c.links||[]));
 console.log(JSON.stringify({originalLinkRows:originalItems.length,originalMissing:initialMissing,revisedLinkRows:finalItems.length,remainingMissing:missing.length,sections:SECTIONS.length,groups:GROUP_ORDER.length},null,2));
 // Check generated JS syntax independently of the browser.
 new vm.Script(out.match(/<script>([\s\S]*?)<\/script>/)[1]);

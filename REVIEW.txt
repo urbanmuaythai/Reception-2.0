@@ -1,9 +1,14 @@
 RECEPTION 2.0 — HANDOVER REVIEW
-22 October 2026 | Urban Muaythai
+17 November 2026 | Urban Muaythai
 
 Scope: Reviewed the live Reception 2.0 Google Site in Chrome using Urban Muaythai. source/reception-original.html preserves its complete embed source (123 resource rows across 21 sections). index.html is the proposed revised page. The user requested repository-only editing. No repository has been created remotely and nothing has been published or pushed.
 
 CHANGES PREPARED
+- Added an on-page Job Description audited from the current Front of House role and revised handbook.
+- Added on-page Responsibilities & Outcomes, including manager quality-control responsibilities and outcome measures requiring final owner / reporting confirmation.
+- Added an ordered on-page Daily Checklist covering preparation, class check-in, Clubworx and member administration, cash / stock / promotion, closing and handover.
+- Preserved source-document links for provenance, while the working instructions are now visible directly on the page.
+- Flagged unclear or conflicting daily requirements together instead of silently choosing a policy.
 - Start Here: access, training sequence, first-shift path and where to record work.
 - Eight navigation groups; daily work is separated from reference and handover.
 - Shift handover template with current status, next action, owner, due time and record location.
@@ -46,6 +51,9 @@ REMAINING MISSING RESOURCE ROWS (19)
 19. Email Sequences: How to add a video to YouTube for email sequencing
 
 READ SOURCE DOCUMENTS
+Front of House job role: https://docs.google.com/document/d/1rTsqwmy2PChyDpzZaZaKK8g-rWdBVMu-nmXWB9jfckQ/edit
+Manager oversight of receptionist role: https://docs.google.com/document/d/112deEx6c4CkduuL3Lenkf83Yr9mOiv3CjB7LrbGKS_Y/edit
+Revised Front of House handbook: https://drive.google.com/file/d/1LqxKJTXwo81FK6NN88Hvcrtn7y6Vm6k8/view
 Daily checklist: https://docs.google.com/document/d/1ZorHWLC28qJ3n7Vqdghr7ZOcyUfOuV-DmhMzp1ZZHsY/edit
 Weekly checklist: https://docs.google.com/document/d/1gMLVWxIvI-NTPSV9ft6JYcomZWzDNZxkPwNIREAuuJU/edit
 Suspension procedure: https://docs.google.com/document/d/1x6H2UdQywhkSA7ZM9N8pQ1qHcTn5CUGTXymA3bBgDjY/edit
