@@ -21,8 +21,8 @@ const refs = {
   checks: doc('125qa3jhbxQSFZQpbR_kM0w0uMIPRfm8kEAPOce7tvwA'),
   bulk: doc('1X-KEmpsDMUe5Iz2BZTXGom7wlXWdneujFK1_nBspqTc'),
 };
-const GROUP_ORDER = ['Role & Daily Checklist','Start Here','My Shift','Members & Check-In','Clubworx & Waivers','Programs','Sales & Stock','Marketing & Events','Reference & Handover'];
-const groups = {'Daily Basics':'My Shift','Reception SOP Library':'Reference & Handover','Check-In & Front Desk':'Members & Check-In','Clubworx Reference':'Clubworx & Waivers','Memberships & Waivers':'Clubworx & Waivers','Member Actions':'Members & Check-In','Programs & Sign-Ups':'Programs','Sales, Stock & Money':'Sales & Stock'};
+const GROUP_ORDER = ['Role & Daily Checklist','Start Here','My Shift','Check-In & Front Desk','Clubworx Reference','Memberships & Waivers','Member Actions','Programs & Sign-Ups','Sales, Stock & Money','Marketing & Events','Reference & Handover'];
+const groups = {'Daily Basics':'My Shift','Reception SOP Library':'Reference & Handover'};
 SECTIONS.forEach(s => s.group = groups[s.group] || s.group);
 const section = id => SECTIONS.find(s => s.id === id);
 const originalItems = SECTIONS.flatMap(s => (s.cards || s.tiles || []).flatMap(c => c.links));
@@ -109,7 +109,7 @@ out = out.replace('<title>Urban Muaythai — Reception</title>','<title>Urban Mu
 out = out.replace('Front Desk Knowledge Base','Front Desk • Onboarding & Daily Work');
 out = out.replace('<h1>RECEP<em>TION</em></h1>','<h1>RECEP<em>TION</em> <span class="version">2.0</span></h1>');
 out = out.replace('<p class="tagline"><b>An eye for detail is critical for successful member management.</b> Use this page to find the right process fast, then follow the linked SOP as the source of truth.</p>','<p class="tagline"><b>Know what to do, find the steps, check the result.</b> New starters begin with Role & Daily Checklist, then follow the shift and linked procedures.</p>');
-out = out.replace('Search suspensions, waivers, cash sheet, grading…','Search a task: check-in, cancellation, stocktake…');
+out = out.replace('Search suspensions, waivers, cash sheet, grading…','Search waivers, program sign-ups, cancellations, stocktake…');
 out = out.replace('<div class="searchmeta" id="searchmeta"></div>','<div class="searchmeta" id="searchmeta" role="status" aria-live="polite"></div>');
 out = out.replace('Links open in a new tab. The linked SOP is the source of truth; access remains controlled by Google Drive permissions.','External links open in a new tab. Use the current approved SOP and signed member terms. New training and handover guidance is proposed for team review. This page does not save task completion or member cases.');
 out = out.replace('const tag=\'a\';',"const tag=has?'a':'span';");

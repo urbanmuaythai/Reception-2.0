@@ -457,72 +457,6 @@
       "url": "https://docs.google.com/document/d/1ku8H5Z7nei0-mj1znY4QK01v9S7_Z8Bn/edit?usp=drivesdk"
     },
     {
-      "section": "Member Actions",
-      "card": "SUSPENSIONS",
-      "label": "Process a member suspension",
-      "url": "https://docs.google.com/document/d/1x6H2UdQywhkSA7ZM9N8pQ1qHcTn5CUGTXymA3bBgDjY/edit"
-    },
-    {
-      "section": "Member Actions",
-      "card": "SUSPENSIONS",
-      "label": "Suspension / cancellation check sheet",
-      "url": "https://docs.google.com/document/d/125qa3jhbxQSFZQpbR_kM0w0uMIPRfm8kEAPOce7tvwA/edit"
-    },
-    {
-      "section": "Member Actions",
-      "card": "SUSPENSIONS",
-      "label": "Bulk member suspensions — supervised task",
-      "url": "https://docs.google.com/document/d/1X-KEmpsDMUe5Iz2BZTXGom7wlXWdneujFK1_nBspqTc/edit"
-    },
-    {
-      "section": "Member Actions",
-      "card": "CANCELLATIONS",
-      "label": "Cancellation application forms & checks",
-      "url": "https://docs.google.com/document/d/1F-u27_V9SSFCFPNrSYfNg58GJjdqU6RncR8RNQcHzms/edit"
-    },
-    {
-      "section": "Member Actions",
-      "card": "CANCELLATIONS",
-      "label": "Processing member cancellations — review notice wording",
-      "url": "https://docs.google.com/document/d/1T_7qnI8a4NulZQPnivvfQ99NqAtYWPysfxmD2IYpYCY/edit"
-    },
-    {
-      "section": "Member Actions",
-      "card": "CANCELLATIONS",
-      "label": "Suspension / cancellation check sheet",
-      "url": "https://docs.google.com/document/d/125qa3jhbxQSFZQpbR_kM0w0uMIPRfm8kEAPOce7tvwA/edit"
-    },
-    {
-      "section": "Member Actions",
-      "card": "UPGRADE / DOWNGRADE",
-      "label": "Membership changes / upgrade / downgrade",
-      "url": "https://docs.google.com/document/d/1s7aN0DD-yq3GO1bsGBT_FzCEtsnajZv7v3Zr2LM9flo/edit"
-    },
-    {
-      "section": "Member Actions",
-      "card": "MEMBER DETAILS",
-      "label": "Update member details & scan tags",
-      "url": "https://docs.google.com/document/d/1RplZv1I-gtlPOa77M4EZcHOUAmXNgZTipqk21Uemwns/edit"
-    },
-    {
-      "section": "Member Actions",
-      "card": "PAYMENT QUESTIONS",
-      "label": "Ezidebit payments / direct debits",
-      "url": "https://docs.google.com/document/d/1gaEQ1NaYoebU0YradhZ2-pIVUD7mUx9W8SUZyDjYWbI/edit"
-    },
-    {
-      "section": "Member Actions",
-      "card": "PAYMENT QUESTIONS",
-      "label": "Failed-payment video",
-      "url": ""
-    },
-    {
-      "section": "Member Actions",
-      "card": "PAYMENT QUESTIONS",
-      "label": "Pending-payment video",
-      "url": ""
-    },
-    {
       "section": "Clubworx Analysis",
       "card": "Why it matters",
       "label": "Clubworx Analysis — PDF",
@@ -599,6 +533,72 @@
       "card": "Pricing & memberships",
       "label": "Family Discounts",
       "url": "https://docs.google.com/spreadsheets/d/1z6VtArvVm_OuapfKdcj2rUjKQwiRSvNI5Rd_QUoHrBk/edit?gid=0#gid=0"
+    },
+    {
+      "section": "Member Actions",
+      "card": "SUSPENSIONS",
+      "label": "Process a member suspension",
+      "url": "https://docs.google.com/document/d/1x6H2UdQywhkSA7ZM9N8pQ1qHcTn5CUGTXymA3bBgDjY/edit"
+    },
+    {
+      "section": "Member Actions",
+      "card": "SUSPENSIONS",
+      "label": "Suspension / cancellation check sheet",
+      "url": "https://docs.google.com/document/d/125qa3jhbxQSFZQpbR_kM0w0uMIPRfm8kEAPOce7tvwA/edit"
+    },
+    {
+      "section": "Member Actions",
+      "card": "SUSPENSIONS",
+      "label": "Bulk member suspensions — supervised task",
+      "url": "https://docs.google.com/document/d/1X-KEmpsDMUe5Iz2BZTXGom7wlXWdneujFK1_nBspqTc/edit"
+    },
+    {
+      "section": "Member Actions",
+      "card": "CANCELLATIONS",
+      "label": "Cancellation application forms & checks",
+      "url": "https://docs.google.com/document/d/1F-u27_V9SSFCFPNrSYfNg58GJjdqU6RncR8RNQcHzms/edit"
+    },
+    {
+      "section": "Member Actions",
+      "card": "CANCELLATIONS",
+      "label": "Processing member cancellations — review notice wording",
+      "url": "https://docs.google.com/document/d/1T_7qnI8a4NulZQPnivvfQ99NqAtYWPysfxmD2IYpYCY/edit"
+    },
+    {
+      "section": "Member Actions",
+      "card": "CANCELLATIONS",
+      "label": "Suspension / cancellation check sheet",
+      "url": "https://docs.google.com/document/d/125qa3jhbxQSFZQpbR_kM0w0uMIPRfm8kEAPOce7tvwA/edit"
+    },
+    {
+      "section": "Member Actions",
+      "card": "UPGRADE / DOWNGRADE",
+      "label": "Membership changes / upgrade / downgrade",
+      "url": "https://docs.google.com/document/d/1s7aN0DD-yq3GO1bsGBT_FzCEtsnajZv7v3Zr2LM9flo/edit"
+    },
+    {
+      "section": "Member Actions",
+      "card": "MEMBER DETAILS",
+      "label": "Update member details & scan tags",
+      "url": "https://docs.google.com/document/d/1RplZv1I-gtlPOa77M4EZcHOUAmXNgZTipqk21Uemwns/edit"
+    },
+    {
+      "section": "Member Actions",
+      "card": "PAYMENT QUESTIONS",
+      "label": "Ezidebit payments / direct debits",
+      "url": "https://docs.google.com/document/d/1gaEQ1NaYoebU0YradhZ2-pIVUD7mUx9W8SUZyDjYWbI/edit"
+    },
+    {
+      "section": "Member Actions",
+      "card": "PAYMENT QUESTIONS",
+      "label": "Failed-payment video",
+      "url": ""
+    },
+    {
+      "section": "Member Actions",
+      "card": "PAYMENT QUESTIONS",
+      "label": "Pending-payment video",
+      "url": ""
     },
     {
       "section": "Kickstarter Program",
@@ -1430,6 +1430,52 @@
         "url": "https://docs.google.com/document/d/1ku8H5Z7nei0-mj1znY4QK01v9S7_Z8Bn/edit?usp=drivesdk"
       }
     ],
+    "1nWKL28wb-uYfow7pduA2-tVSuXluB0BfOCX9Yn4z0D8": [
+      {
+        "section": "Clubworx Analysis",
+        "card": "Why it matters",
+        "label": "Clubworx Analysis — PDF",
+        "url": "https://docs.google.com/document/d/1nWKL28wb-uYfow7pduA2-tVSuXluB0BfOCX9Yn4z0D8/edit?tab=t.0"
+      }
+    ],
+    "1Zi_UeT6fX84fzy8FmTW_pd9DOtjG6_n3GZ0QP65H5TU": [
+      {
+        "section": "Membership Types",
+        "card": "Pricing & memberships",
+        "label": "6 & 12 month memberships — PDF",
+        "url": "https://docs.google.com/document/d/1Zi_UeT6fX84fzy8FmTW_pd9DOtjG6_n3GZ0QP65H5TU/edit?usp=sharing"
+      },
+      {
+        "section": "Membership Types",
+        "card": "Pricing & memberships",
+        "label": "Review Waivers — Check List",
+        "url": "https://docs.google.com/document/d/1Zi_UeT6fX84fzy8FmTW_pd9DOtjG6_n3GZ0QP65H5TU/edit?usp=sharing"
+      }
+    ],
+    "1TD5r6EaclCui4H6dhEbYuWJa5MOorjO74ux40ZS8dr0": [
+      {
+        "section": "Membership Types",
+        "card": "Pricing & memberships",
+        "label": "Upfront payments — members",
+        "url": "https://docs.google.com/document/d/1TD5r6EaclCui4H6dhEbYuWJa5MOorjO74ux40ZS8dr0/edit?tab=t.0"
+      }
+    ],
+    "15IaPE58JYzCZPJhqWNKqL9c5D2i_jyfOI2EhXTQh5B8": [
+      {
+        "section": "Membership Types",
+        "card": "Pricing & memberships",
+        "label": "Paying with business — sponsor 12 mths",
+        "url": "https://docs.google.com/document/d/15IaPE58JYzCZPJhqWNKqL9c5D2i_jyfOI2EhXTQh5B8/edit?tab=t.0"
+      }
+    ],
+    "1z6VtArvVm_OuapfKdcj2rUjKQwiRSvNI5Rd_QUoHrBk": [
+      {
+        "section": "Membership Types",
+        "card": "Pricing & memberships",
+        "label": "Family Discounts",
+        "url": "https://docs.google.com/spreadsheets/d/1z6VtArvVm_OuapfKdcj2rUjKQwiRSvNI5Rd_QUoHrBk/edit?gid=0#gid=0"
+      }
+    ],
     "1x6H2UdQywhkSA7ZM9N8pQ1qHcTn5CUGTXymA3bBgDjY": [
       {
         "section": "Member Actions",
@@ -1496,52 +1542,6 @@
         "card": "MEMBER DETAILS",
         "label": "Update member details & scan tags",
         "url": "https://docs.google.com/document/d/1RplZv1I-gtlPOa77M4EZcHOUAmXNgZTipqk21Uemwns/edit"
-      }
-    ],
-    "1nWKL28wb-uYfow7pduA2-tVSuXluB0BfOCX9Yn4z0D8": [
-      {
-        "section": "Clubworx Analysis",
-        "card": "Why it matters",
-        "label": "Clubworx Analysis — PDF",
-        "url": "https://docs.google.com/document/d/1nWKL28wb-uYfow7pduA2-tVSuXluB0BfOCX9Yn4z0D8/edit?tab=t.0"
-      }
-    ],
-    "1Zi_UeT6fX84fzy8FmTW_pd9DOtjG6_n3GZ0QP65H5TU": [
-      {
-        "section": "Membership Types",
-        "card": "Pricing & memberships",
-        "label": "6 & 12 month memberships — PDF",
-        "url": "https://docs.google.com/document/d/1Zi_UeT6fX84fzy8FmTW_pd9DOtjG6_n3GZ0QP65H5TU/edit?usp=sharing"
-      },
-      {
-        "section": "Membership Types",
-        "card": "Pricing & memberships",
-        "label": "Review Waivers — Check List",
-        "url": "https://docs.google.com/document/d/1Zi_UeT6fX84fzy8FmTW_pd9DOtjG6_n3GZ0QP65H5TU/edit?usp=sharing"
-      }
-    ],
-    "1TD5r6EaclCui4H6dhEbYuWJa5MOorjO74ux40ZS8dr0": [
-      {
-        "section": "Membership Types",
-        "card": "Pricing & memberships",
-        "label": "Upfront payments — members",
-        "url": "https://docs.google.com/document/d/1TD5r6EaclCui4H6dhEbYuWJa5MOorjO74ux40ZS8dr0/edit?tab=t.0"
-      }
-    ],
-    "15IaPE58JYzCZPJhqWNKqL9c5D2i_jyfOI2EhXTQh5B8": [
-      {
-        "section": "Membership Types",
-        "card": "Pricing & memberships",
-        "label": "Paying with business — sponsor 12 mths",
-        "url": "https://docs.google.com/document/d/15IaPE58JYzCZPJhqWNKqL9c5D2i_jyfOI2EhXTQh5B8/edit?tab=t.0"
-      }
-    ],
-    "1z6VtArvVm_OuapfKdcj2rUjKQwiRSvNI5Rd_QUoHrBk": [
-      {
-        "section": "Membership Types",
-        "card": "Pricing & memberships",
-        "label": "Family Discounts",
-        "url": "https://docs.google.com/spreadsheets/d/1z6VtArvVm_OuapfKdcj2rUjKQwiRSvNI5Rd_QUoHrBk/edit?gid=0#gid=0"
       }
     ],
     "1shEPW-WJSaY3ShHhGd9faXxpiU5fNlrVvMoK8a0FyIg": [

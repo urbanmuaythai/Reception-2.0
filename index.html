@@ -265,7 +265,7 @@ footer b{color:var(--muted);font-weight:600}
     <div class="command">
       <svg class="mag" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input id="search" type="text" autocomplete="off" spellcheck="false"
-        placeholder="Search a task: check-in, cancellation, stocktake…" aria-label="Search the reception knowledge base">
+        placeholder="Search waivers, program sign-ups, cancellations, stocktake…" aria-label="Search the reception knowledge base">
       <div class="kbd"><kbd>/</kbd><span>to search</span></div>
       <button id="clearBtn" aria-label="Clear search">×</button>
     </div>
@@ -296,7 +296,7 @@ footer b{color:var(--muted);font-weight:600}
 /* Sections are grouped into the order reception actually works through a
    shift: get oriented -> front desk/check-in -> Clubworx -> sign people up
    -> handle member actions -> run programs -> sales/stock -> marketing. */
-const GROUP_ORDER = ["Role & Daily Checklist","Start Here","My Shift","Members & Check-In","Clubworx & Waivers","Programs","Sales & Stock","Marketing & Events","Reference & Handover"];
+const GROUP_ORDER = ["Role & Daily Checklist","Start Here","My Shift","Check-In & Front Desk","Clubworx Reference","Memberships & Waivers","Member Actions","Programs & Sign-Ups","Sales, Stock & Money","Marketing & Events","Reference & Handover"];
 const SECTIONS = [
   {
     "id": "job-description",
@@ -1063,7 +1063,7 @@ const SECTIONS = [
   },
   {
     "id": "member-management",
-    "group": "Members & Check-In",
+    "group": "Check-In & Front Desk",
     "title": "Member Management",
     "note": "Customer service · check-ins · payments",
     "cards": [
@@ -1141,7 +1141,7 @@ const SECTIONS = [
   },
   {
     "id": "communication",
-    "group": "Members & Check-In",
+    "group": "Check-In & Front Desk",
     "title": "Communication",
     "note": "Contact notes · email · SMS",
     "cards": [
@@ -1168,8 +1168,120 @@ const SECTIONS = [
     ]
   },
   {
+    "id": "clubworx-analysis",
+    "group": "Clubworx Reference",
+    "title": "Clubworx Analysis",
+    "note": "Do this every shift",
+    "cards": [
+      {
+        "h": "Why it matters",
+        "sub": "Removes mistakes, keeps members happy, and helps the team understand what’s happening in the gym.",
+        "links": [
+          {
+            "t": "Clubworx Analysis — PDF",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1nWKL28wb-uYfow7pduA2-tVSuXluB0BfOCX9Yn4z0D8/edit?tab=t.0"
+          },
+          {
+            "t": "Clubworx Analysis — Video",
+            "k": "video",
+            "u": "https://share.getcloudapp.com/6quQN9Ad"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "clubworx-howto",
+    "group": "Clubworx Reference",
+    "title": "Clubworx How-Tos",
+    "note": "",
+    "cards": [
+      {
+        "h": "Working in Clubworx",
+        "links": [
+          {
+            "t": "How to create a new waiver",
+            "k": "doc",
+            "u": ""
+          },
+          {
+            "t": "How to adjust a waiver",
+            "k": "doc",
+            "u": ""
+          },
+          {
+            "t": "Waiver Types Explained",
+            "k": "link",
+            "u": "#waivers"
+          },
+          {
+            "t": "How to send a bulk Email or Text",
+            "k": "doc",
+            "u": ""
+          },
+          {
+            "t": "How to build a report",
+            "k": "doc",
+            "u": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "membership-types",
+    "group": "Memberships & Waivers",
+    "title": "Membership Types",
+    "note": "Prices · waivers · discounts",
+    "cards": [
+      {
+        "h": "Pricing & memberships",
+        "links": [
+          {
+            "t": "Membership Prices",
+            "k": "doc",
+            "u": ""
+          },
+          {
+            "t": "6 & 12 month memberships — PDF",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1Zi_UeT6fX84fzy8FmTW_pd9DOtjG6_n3GZ0QP65H5TU/edit?usp=sharing"
+          },
+          {
+            "t": "Review Waivers — Check List",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1Zi_UeT6fX84fzy8FmTW_pd9DOtjG6_n3GZ0QP65H5TU/edit?usp=sharing"
+          },
+          {
+            "t": "Upfront payments — members",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/1TD5r6EaclCui4H6dhEbYuWJa5MOorjO74ux40ZS8dr0/edit?tab=t.0"
+          },
+          {
+            "t": "Paying with business — sponsor 12 mths",
+            "k": "doc",
+            "u": "https://docs.google.com/document/d/15IaPE58JYzCZPJhqWNKqL9c5D2i_jyfOI2EhXTQh5B8/edit?tab=t.0"
+          },
+          {
+            "t": "Family Discounts",
+            "k": "sheet",
+            "u": "https://docs.google.com/spreadsheets/d/1z6VtArvVm_OuapfKdcj2rUjKQwiRSvNI5Rd_QUoHrBk/edit?gid=0#gid=0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "waivers",
+    "group": "Memberships & Waivers",
+    "title": "Waiver Types Explained",
+    "note": "Reference only • confirm the current form in Clubworx with your trainer",
+    "custom": "waivers"
+  },
+  {
     "id": "quick-actions",
-    "group": "Members & Check-In",
+    "group": "Member Actions",
     "title": "Member Actions",
     "note": "Open the procedure • verify the result • record the outcome",
     "tiles": [
@@ -1266,120 +1378,8 @@ const SECTIONS = [
     ]
   },
   {
-    "id": "clubworx-analysis",
-    "group": "Clubworx & Waivers",
-    "title": "Clubworx Analysis",
-    "note": "Do this every shift",
-    "cards": [
-      {
-        "h": "Why it matters",
-        "sub": "Removes mistakes, keeps members happy, and helps the team understand what’s happening in the gym.",
-        "links": [
-          {
-            "t": "Clubworx Analysis — PDF",
-            "k": "doc",
-            "u": "https://docs.google.com/document/d/1nWKL28wb-uYfow7pduA2-tVSuXluB0BfOCX9Yn4z0D8/edit?tab=t.0"
-          },
-          {
-            "t": "Clubworx Analysis — Video",
-            "k": "video",
-            "u": "https://share.getcloudapp.com/6quQN9Ad"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "clubworx-howto",
-    "group": "Clubworx & Waivers",
-    "title": "Clubworx How-Tos",
-    "note": "",
-    "cards": [
-      {
-        "h": "Working in Clubworx",
-        "links": [
-          {
-            "t": "How to create a new waiver",
-            "k": "doc",
-            "u": ""
-          },
-          {
-            "t": "How to adjust a waiver",
-            "k": "doc",
-            "u": ""
-          },
-          {
-            "t": "Waiver Types Explained",
-            "k": "link",
-            "u": "#waivers"
-          },
-          {
-            "t": "How to send a bulk Email or Text",
-            "k": "doc",
-            "u": ""
-          },
-          {
-            "t": "How to build a report",
-            "k": "doc",
-            "u": ""
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "membership-types",
-    "group": "Clubworx & Waivers",
-    "title": "Membership Types",
-    "note": "Prices · waivers · discounts",
-    "cards": [
-      {
-        "h": "Pricing & memberships",
-        "links": [
-          {
-            "t": "Membership Prices",
-            "k": "doc",
-            "u": ""
-          },
-          {
-            "t": "6 & 12 month memberships — PDF",
-            "k": "doc",
-            "u": "https://docs.google.com/document/d/1Zi_UeT6fX84fzy8FmTW_pd9DOtjG6_n3GZ0QP65H5TU/edit?usp=sharing"
-          },
-          {
-            "t": "Review Waivers — Check List",
-            "k": "doc",
-            "u": "https://docs.google.com/document/d/1Zi_UeT6fX84fzy8FmTW_pd9DOtjG6_n3GZ0QP65H5TU/edit?usp=sharing"
-          },
-          {
-            "t": "Upfront payments — members",
-            "k": "doc",
-            "u": "https://docs.google.com/document/d/1TD5r6EaclCui4H6dhEbYuWJa5MOorjO74ux40ZS8dr0/edit?tab=t.0"
-          },
-          {
-            "t": "Paying with business — sponsor 12 mths",
-            "k": "doc",
-            "u": "https://docs.google.com/document/d/15IaPE58JYzCZPJhqWNKqL9c5D2i_jyfOI2EhXTQh5B8/edit?tab=t.0"
-          },
-          {
-            "t": "Family Discounts",
-            "k": "sheet",
-            "u": "https://docs.google.com/spreadsheets/d/1z6VtArvVm_OuapfKdcj2rUjKQwiRSvNI5Rd_QUoHrBk/edit?gid=0#gid=0"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "waivers",
-    "group": "Clubworx & Waivers",
-    "title": "Waiver Types Explained",
-    "note": "Reference only • confirm the current form in Clubworx with your trainer",
-    "custom": "waivers"
-  },
-  {
     "id": "kickstarter",
-    "group": "Programs",
+    "group": "Programs & Sign-Ups",
     "title": "Kickstarter Program",
     "note": "Trial → rollover",
     "cards": [
@@ -1422,7 +1422,7 @@ const SECTIONS = [
   },
   {
     "id": "urban-warrior",
-    "group": "Programs",
+    "group": "Programs & Sign-Ups",
     "title": "Urban Warrior Program",
     "note": "Not currently running",
     "cards": [
@@ -1470,7 +1470,7 @@ const SECTIONS = [
   },
   {
     "id": "kids",
-    "group": "Programs",
+    "group": "Programs & Sign-Ups",
     "title": "Kids Programs",
     "note": "Waivers · trials · memberships",
     "cards": [
@@ -1548,7 +1548,7 @@ const SECTIONS = [
   },
   {
     "id": "grading",
-    "group": "Programs",
+    "group": "Programs & Sign-Ups",
     "title": "Grading",
     "note": "",
     "cards": [
@@ -1576,7 +1576,7 @@ const SECTIONS = [
   },
   {
     "id": "pt-and-vouchers",
-    "group": "Programs",
+    "group": "Programs & Sign-Ups",
     "title": "PT Sessions & Vouchers",
     "note": "",
     "cards": [
@@ -1604,7 +1604,7 @@ const SECTIONS = [
   },
   {
     "id": "equipment-sales",
-    "group": "Sales & Stock",
+    "group": "Sales, Stock & Money",
     "title": "Equipment Sales",
     "note": "POS · EFTPOS · reconciliation",
     "cards": [
@@ -1652,7 +1652,7 @@ const SECTIONS = [
   },
   {
     "id": "stock",
-    "group": "Sales & Stock",
+    "group": "Sales, Stock & Money",
     "title": "Stock Control / Stock Take",
     "note": "",
     "cards": [
