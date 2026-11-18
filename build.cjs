@@ -108,7 +108,7 @@ out = out.replaceAll('Training & Jakob handover','Reception / Front Desk handove
 out = out.replace('<title>Urban Muaythai — Reception</title>','<title>Urban Muaythai — Reception / Front Desk</title>');
 out = out.replace('Front Desk Knowledge Base','Front Desk • Onboarding & Daily Work');
 out = out.replace('<h1>RECEP<em>TION</em></h1>','<h1>RECEP<em>TION</em> <span class="version">2.0</span></h1>');
-out = out.replace('<p class="tagline"><b>An eye for detail is critical for successful member management.</b> Use this page to find the right process fast, then follow the linked SOP as the source of truth.</p>','<p class="tagline"><b>Know what to do, find the steps, check the result.</b> New starters begin with Role & Daily Checklist, then follow the shift and linked procedures.</p><p class="review-banner">Audit draft · 17 November 2026 · Job Description, Responsibilities & Outcomes and Daily Checklist are now on-page. Items marked for confirmation are not approved policy until resolved by the team.</p>');
+out = out.replace('<p class="tagline"><b>An eye for detail is critical for successful member management.</b> Use this page to find the right process fast, then follow the linked SOP as the source of truth.</p>','<p class="tagline"><b>Know what to do, find the steps, check the result.</b> New starters begin with Role & Daily Checklist, then follow the shift and linked procedures.</p>');
 out = out.replace('Search suspensions, waivers, cash sheet, grading…','Search a task: check-in, cancellation, stocktake…');
 out = out.replace('<div class="searchmeta" id="searchmeta"></div>','<div class="searchmeta" id="searchmeta" role="status" aria-live="polite"></div>');
 out = out.replace('Links open in a new tab. The linked SOP is the source of truth; access remains controlled by Google Drive permissions.','External links open in a new tab. Use the current approved SOP and signed member terms. New training and handover guidance is proposed for team review. This page does not save task completion or member cases.');
@@ -150,7 +150,6 @@ out = out.slice(0,filterStart) + `function filter(){
 }` + out.slice(filterEnd);
 const css = `
 .hero{padding:42px 0 28px}.version{color:var(--gold);font-size:.5em;vertical-align:middle}
-.review-banner{max-width:820px;margin:20px auto 0;padding:12px 16px;border:1px solid rgba(245,185,33,.3);border-radius:10px;background:rgba(245,185,33,.07);color:#d9c994;font-size:12px;text-align:left}
 .steps{padding-left:21px;color:var(--muted);font-size:13px;margin:14px 0}.steps li{margin:0 0 9px;padding-left:3px}
 .done{font-size:12.5px;padding:11px 12px;border-left:3px solid var(--gold);background:rgba(245,185,33,.05);color:var(--muted);margin:14px 0}.done b{color:var(--gold)}
 .tile .sub{font-size:13px;color:var(--muted);margin:12px 0}.tile .body{padding:12px 16px 16px}
