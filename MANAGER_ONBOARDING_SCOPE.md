@@ -74,10 +74,10 @@ The current Reception and Clubworx materials indicate that the following tools m
 | Weekly reception checklist | Weekday duties, cleaning and reconciliation | Keep in Weekly Manager Rhythm | Confirm current rotation and frequencies |
 | Shift handover | Outstanding work, owner, next action, due time and record location | Make a core manager control | Confirm the approved shared location |
 | Daily Numbers | Intros, rollovers, conversions, cancellations and net movement | Link from reporting and Clubworx Analysis | Confirm manager inputs and deadline |
-| New Member Spreadsheet | New-member status and start/attendance alignment | Link from new-member and Clubworx checks | Confirm fields the manager owns |
+| NMS app (replaces the New Member Spreadsheet) | New members, start/attendance, First Class and Reach Out lists, final statuses | Link from new-member, Kickstarter and Clubworx checks | Staff logins created in Admin ▸ Staff & logins |
 | Red and Orange Flag trackers | Retention risks and required follow-up | Link from member-care review | Confirm owner, review frequency and escalation |
 | Weekly Cash Sheet / till reconciliation | Cash and end-of-week reconciliation | Keep under finance controls | Confirm process, approver and storage location |
-| Membership Tally | Weekly membership reporting | Link from weekly reporting | Confirm source, deadline and recipient |
+| Historical Membership (replaces the Membership Tally) | Weekly membership numbers | Link from weekly reporting and Assistant 2.0 Tools | Confirm who updates it and when |
 | Reception SOP folder | Approved procedures and reference material | Use as the source library | Audit access, owners and review dates |
 | Slack or approved team channel | Operational escalation and team communication | Provide an escalation matrix, not duplicated chat history | Confirm channels and response expectations |
 
@@ -179,8 +179,9 @@ This is a strong front desk foundation. It is not yet a complete manager onboard
 
 ## Known decisions still required
 
+Settled (Mel, Nov 2026): escalation goes to Mel or Richie, who have the final say; cancellation, suspension, Kickstarter, roll-over and failed-payment rules are on the page under Membership Rules.
+
 - Approved training sign-off and shift-handover location.
-- Manager escalation route, backup cover and outgoing staff handover.
-- Current cancellation and suspension rules where source documents conflict.
-- Current cleaning rotation, prices, offers, dates and waiver names.
+- Backup cover for the front desk.
+- Current cleaning rotation, mirror-cleaning frequency, prices, offers, dates and waiver names.
 - Missing guides and videos listed in `REVIEW.txt`.

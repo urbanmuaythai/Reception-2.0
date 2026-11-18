@@ -1,5 +1,5 @@
 RECEPTION 2.0 — HANDOVER REVIEW
-17 November 2026 | Urban Muaythai
+18 November 2026 | Urban Muaythai
 
 Scope: Reviewed the live Reception 2.0 Google Site in Chrome using Urban Muaythai. source/reception-original.html preserves its complete embed source (123 resource rows across 21 sections). index.html is the proposed revised page. The user requested repository-only editing. No repository has been created remotely and nothing has been published or pushed.
 
@@ -19,36 +19,55 @@ CHANGES PREPARED
 - Search now covers headings, instructions and card text. Search query text is rendered as text. Waiver form names without URLs are no longer dead # links.
 - Gmail opens using the Urban Muaythai account identifier rather than a fixed browser account slot.
 
-OPEN QUESTIONS FOR THE TEAM
-1. Use Reception / Front Desk as the role label, as requested. Confirm the training support, escalation route, backup cover and outgoing staff handover date.
-2. Resolve cancellation notice wording. The processing SOP mentions 7 days but contains a 30-day worked example. The older application-form document also refers to 30 days for Teens/Cadets. The draft does not choose a universal notice period; staff must check the signed agreement and ask the manager about conflicting instructions.
-3. Confirm current handling for cancellations during suspension and minimum Kickstarter commitments. The local Clubworx analysis file has additional guidance which needs reconciling with the source SOP.
-4. Confirm mirror cleaning frequency: daily source says daily; weekly source lists Wednesday.
-5. Confirm the current Week 1 / Week 2 cleaning rotation and fortnightly vacuum / bottle-bin dates. The weekly source’s note “done on the 22nd” does not establish a reusable current schedule.
-6. Confirm current prices, offers, event dates and waiver names. Existing references, including a 2025 program-date link, have been preserved for review rather than treated as current.
-7. Identify the approved place for training sign-off and shift handover. This HTML does not save completion, store member cases, or sync a shared checklist.
-8. The original Google Sites embed is preserved in source/reception-original.html. The temporary Sites draft edit was undone and exact code restoration verified; the published Site was unchanged. No standalone Reception repository or matching console code was found among the Urban Muaythai repositories inspected. Assistant links to the Google Site and Guides holds related procedures. This package is prepared as a new local repository pending the GitHub destination.
+ANSWERED (confirmed by Mel, Nov 2026, now on the page under Membership Rules)
+- Escalation: Mel and Richie (owners) have the final say. Failed payments that need a phone call go to them.
+- Cancellation notice: adults out of agreement 7 days; in agreement 50% of remaining fees, or 7 days with proof (move over 20km, medical or termination certificate) saved to Drive. Kids / teens 7 days or end of term. 15-18: 30 days, no 6-month agreement.
+- Cancelling during a suspension: suspended time is added to the agreement end date.
+- Kickstarter and trials: completed in full, no early cancellation. Short Term: 3-month agreement, same 50% rule.
+- Suspensions: 2 to 6 weeks each, max 2 in any 12 months, 48 hours notice, never backdated; medical holds processed on a certificate.
+- Roll-overs: new membership waiver signed first, then the membership is changed in Clubworx the same day.
+- New members: the NMS app replaces the New Member Spreadsheet everywhere on the page (Every Shift, Daily Checklist, tools, handover, Kickstarter rules).
+- Prices now follow the new price list (PRICE LIST - NEW): memberships, Kickstarter, kids / teens / 15-18, casuals, equipment, kits, apparel and drinks. Clubworx 15-18 (3x per week) plan changed from $50 to $55 on 18 Nov.
+- Pricing & memberships: first rebuilt from the Clubworx plan list (checked 18 Nov 2026). Removed the 6 & 12 month memberships PDF and Review Waivers checklist links (same document, no longer opens). Family Discounts, Upfront Payments and Sponsorship Proposal are kept but marked as older prices.
+- Memberships & Waivers: current prices, agreements, free sessions / Play On vouchers, which form to send, sending and approving forms, Kickstarter and kids rules, all from the Clubworx Analysis Guide (Waivers & Forms) and the Oct 2026 price rise.
+- Cash: the old Weekly Cash Sheet links are replaced by the new Cash Sheet and its SOP (version 1, 12 Nov 2026, awaiting Mel’s approval). New Cash Sheet section added under Sales, Stock & Money.
 
-REMAINING MISSING RESOURCE ROWS (19)
+- Your Role @ Reception: links now point to the on-page Job Description, Responsibilities, Daily Checklist and Weekly Duties. Responsibilities / Outcomes and Computer Logins Google Docs no longer open (not found) and were removed. Weekly Duties follow the current weekly checklist (struck-out items removed: bins, team meeting, Monday KS calls, yellow / orange flags, stock order, Kickstarter goals).
+- Assistant 2.0 Tools: new section with every tool linked from the Assistant hub (NMS app used in place of the New Member Spreadsheet). Membership Tally replaced by Historical Membership.
+- Clubworx Reference: new Clubworx Tools, Trackers & Logs section with the Clubworx-related guides, logs, trackers and data sheets from Assistant 2.0.
+
+STILL OPEN
+1. Mirror cleaning frequency: daily source says daily; weekly source lists Wednesday.
+2. Current Week 1 / Week 2 cleaning rotation and fortnightly vacuum / bottle-bin dates.
+3. Current offers and event dates (a 2025 Urban Warrior dates link is still on the page).
+11. Clubworx plans vs the new price list (18 Nov): Kids Upfront Term changed $320 to $370 and new plan UPFRONT 12 Month FUN & FITNESS $2,200 created. Teens stays 2x a week at $40 (price list corrected). Extra plans not on the list: 12-month weekly Accelerate $55 / F&F $45, Upfront Adult Membership Special $2,028, Teens Upfront $350.
+10. Update the Family Discounts sheet, Upfront Payments doc and Sponsorship Proposal to current prices (they still show $45 / $55 adult, $29 kids, $35 / $45 teens, $39 / $49 15-18).
+4. Approved place for training sign-off and shift handover.
+5. Daily checks to confirm: Slack and which inboxes, whether the Online Portal is still used, and one photo / video target.
+6. Which front desk tasks staff own and which need Mel or Richie.
+7. Mel to approve the Cash Sheet SOP (version 1).
+8. Job description says the role reports to the Operations Manager. Confirm who that is now, or change it to Mel and Richie.
+9. The Open Gym Procedure doc still uses the old Urban Fight Gym name and has the laptop PIN and password written in it. Consider moving those out of the doc.
+
+REMAINING MISSING RESOURCE ROWS (18)
 1. Clubworx How-Tos: How to create a new waiver
 2. Clubworx How-Tos: How to adjust a waiver
 3. Clubworx How-Tos: How to send a bulk Email or Text
 4. Clubworx How-Tos: How to build a report
-5. Membership Types: Membership Prices
-6. Member Actions: Failed-payment video
-7. Member Actions: Pending-payment video
-8. Kids Programs: How to approve a child waiver — direct debit or upfront
-9. Grading: Grading Procedure
-10. Grading: Grading Sheet for the Day
-11. Grading: Kids Grading Syllabus
-12. PT Sessions & Vouchers: How to add a PT session & payment to Clubworx — Video
-13. Equipment Sales: How to use the EFTPOS machine
-14. Equipment Sales: KPI — Equipment Sales
-15. Stock Control / Stock Take: Stock ordering
-16. Email Sequences: Sequences Part 1 — Message Template Set-up
-17. Email Sequences: Sequence Part 2 — Sequence Set-up
-18. Email Sequences: How to upload an image for Bulk Emails
-19. Email Sequences: How to add a video to YouTube for email sequencing
+5. Member Actions: Failed-payment video
+6. Member Actions: Pending-payment video
+7. Kids Programs: How to approve a child waiver — direct debit or upfront
+8. Grading: Grading Procedure
+9. Grading: Grading Sheet for the Day
+10. Grading: Kids Grading Syllabus
+11. PT Sessions & Vouchers: How to add a PT session & payment to Clubworx — Video
+12. Equipment Sales: How to use the EFTPOS machine
+13. Equipment Sales: KPI — Equipment Sales
+14. Stock Control / Stock Take: Stock ordering
+15. Email Sequences: Sequences Part 1 — Message Template Set-up
+16. Email Sequences: Sequence Part 2 — Sequence Set-up
+17. Email Sequences: How to upload an image for Bulk Emails
+18. Email Sequences: How to add a video to YouTube for email sequencing
 
 READ SOURCE DOCUMENTS
 Front of House job role: https://docs.google.com/document/d/1rTsqwmy2PChyDpzZaZaKK8g-rWdBVMu-nmXWB9jfckQ/edit
