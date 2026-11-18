@@ -26,6 +26,9 @@ No member cases, credentials or payment details belong in this repository. Opera
 
 ## Hosting status
 
-This is a local Git repository. No GitHub repository or remote has been created, and no changes have been pushed. The temporary Google Sites draft change was undone and the original embed was verified against its backup. The published Site was not changed.
+This project is published through GitHub Pages:
 
-An exact matching source repository was not found among the Urban Muaythai repositories inspected. `urbanmuaythai/Assistant` links to the Google Site; `urbanmuaythai/Guides` contains related SOPs. Neither contains this console.
+- Repository: https://github.com/urbanmuaythai/Reception-2.0
+- Live page: https://urbanmuaythai.github.io/Reception-2.0/
+
+The preserved Google Sites source remains in `source/reception-original.html`. The GitHub Pages version is generated from `build.cjs`; run `node build.cjs`, review the output, and commit both the source and regenerated files when making updates.
