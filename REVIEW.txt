@@ -5,7 +5,7 @@ Scope: Reviewed the live Reception 2.0 Google Site in Chrome using Urban Muaytha
 
 CHANGES PREPARED
 - Added an on-page Job Description audited from the current Front of House role and revised handbook.
-- Added on-page Responsibilities & Outcomes, including manager quality-control responsibilities and outcome measures requiring final owner / reporting confirmation.
+- Added on-page Responsibilities & Outcomes for one combined Gym Manager / Reception role, including self-checking and owner escalation.
 - Added an ordered on-page Daily Checklist covering preparation, class check-in, Clubworx and member administration, cash / stock / promotion, closing and handover.
 - Preserved source-document links for provenance, while the working instructions are now visible directly on the page.
 - Flagged unclear or conflicting daily requirements together instead of silently choosing a policy.
@@ -14,7 +14,7 @@ CHANGES PREPARED
 - Shift handover template with current status, next action, owner, due time and record location.
 - Added Monday to Friday duties from the source weekly checklist, including the cleaning rotation.
 - Replaced the empty member-action panel with located suspension, cancellation, membership-change and member-detail procedures. Moved payment questions into their own card.
-- Added Done when criteria and a proposed Reception / Front Desk handover and trainer demonstration checklist.
+- Added Done when criteria and a proposed Gym Manager / Reception handover and owner-review checklist.
 - Missing resources are labelled Guide needed and listed together for follow-up. Existing unavailable videos remain unavailable; no replacement videos have been invented.
 - Search now covers headings, instructions and card text. Search query text is rendered as text. Waiver form names without URLs are no longer dead # links.
 - Gmail opens using the Urban Muaythai account identifier rather than a fixed browser account slot.
@@ -44,9 +44,9 @@ STILL OPEN
 10. Update the Family Discounts sheet, Upfront Payments doc and Sponsorship Proposal to current prices (they still show $45 / $55 adult, $29 kids, $35 / $45 teens, $39 / $49 15-18).
 4. Approved place for training sign-off and shift handover.
 5. Daily checks to confirm: Slack and which inboxes, whether the Online Portal is still used, and one photo / video target.
-6. Which front desk tasks staff own and which need Mel or Richie.
+6. Which decisions the Gym Manager / Reception role can make and which need Mel or Richie.
 7. Mel to approve the Cash Sheet SOP (version 1).
-8. Job description reporting line updated to Gym Manager per team direction.
+8. Confirmed this is one combined Gym Manager / Reception role reporting directly to Mel or Richie, the owners.
 9. The Open Gym Procedure doc still uses the old Urban Fight Gym name and has the laptop PIN and password written in it. Consider moving those out of the doc.
 
 REMAINING MISSING RESOURCE ROWS (18)
